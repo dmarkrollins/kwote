@@ -1,0 +1,42 @@
+<template name="newAccount">
+        <div class="header">
+            <div class="centerForm" style="padding: 7px;">
+                <div style="max-width: 500px; margin: 0 auto; padding: 20px; border: 0px solid #999;">
+                    <h4 style="color: #783B00;">
+                        Create Account
+                    </h4>
+                    <div style="max-width: 80%; margin: 0 auto;">
+                        <form id="newaccount-form">
+                            <fieldset id="start-fs">
+                                <div class="form-group">
+                                    <input type="text" class="form-control inputField" id="userName" placeholder="A unique user name" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control inputField" id="emailAddress" placeholder="Your email address" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control inputField" id="password" placeholder="Password" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control inputField" id="confirmPassword" placeholder="Confirm Password" autocomplete="off">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="agreeToTerms" value="">
+                                        I agree to the <img src="/kwote.svg" height="18" alt="" style="margin-top: -10px;"/> <a href="#" alt="">terms of service</a>.
+                                    </label>
+                                </div>  
+                                <p>                              
+                                    <span id="errorMessage" class="error-message">{{errMessage}}</span>
+                                </p>
+                                <div>
+                                    <button type="button" class="btn btn-default pull-right" id="btnCancel">Cancel</button>
+                                    <button type="submit" class="btn btn-success pull-right" id="btnOK">OK</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>

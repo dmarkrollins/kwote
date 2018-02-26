@@ -1,0 +1,29 @@
+<template name="projectList">
+
+    {{#if hasProjects}}
+        <table class="table">
+            <thead>
+                <th>Title</th>
+                <th>Last Project</th>
+                <th>Last Modified</th>
+            </thead>
+            <tbody>
+                {{#each project}}
+                    <tr>
+                        <td><a href="#" id="btnTitle">{{title}}</a></td>
+                        <td class="hidden-xs">{{lastProject}}</td>
+                        <td class="hidden-xs">{{lastModified}}</td>
+                        <td colspan="3" style="padding-left: 7px;" class="hidden-xs">{{truncedBody}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    {{else}}
+        <div class="row">
+            <div class="col-xs-12 centerForm vertical-center helpText" style="max-width: 600px; font-weight: bold; color: #dcdcdc;">
+                To get started tap the 'New' button to create your first Project!
+            </div>
+        </div>
+    {{/if}}
+
+</template>

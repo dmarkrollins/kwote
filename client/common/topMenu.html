@@ -1,0 +1,31 @@
+<template name="topMenu">
+    <nav class="navbar navbar-inverse navbar-static-top navbar-custom">
+        <div class="row">
+            <div class="col-xs-3">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#"><img src="/kwote-w.png" height="32" alt="" style="margin-top: -7px;"></a>
+                </div>
+            </div>
+            <div class="col-xs-9 text-right" style="white-space: nowrap; z-index: 999">
+                <a href="#" id="btnKwotes" class="{{notAllowed}} menu-icon"><img src="{{quoteImg}}" alt="" height="24" /></a>
+                <a href="#" id="btnProjects" class="{{notAllowed}} menu-icon"><img src="{{projectImg}}" alt="" height="24" /></a>
+                <a href="#" id="btnCategories" class="{{notAllowed}} menu-icon"><img src="{{categoryImg}}" alt="" height="24" /></a>
+                <a href="#" id="btnAuthors" class="{{notAllowed}} menu-icon"><img src="{{authorImg}}" alt="" height="24" /></a>
+                <div class="btn-group" role="group" aria-label="...">
+                    <a href="#" class="{{notAllowed}} dropdown-toggle menu-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="{{cogImg}}" alt="" height="24" />
+                    </a>
+                    <ul class="dropdown-menu pull-right" style="margin-right: 12px; margin-top: 21px;">
+                        <li><a id="preferences" href="/retro/settings" ><i class="fa fa-sliders" aria-hidden="true" style="color: #783B00;"></i> Preferences</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a id="shareSequent" href="mailto:?subject=Check%20Out%20Sequent&body=Simple%20team%20retrospectives%20-%20https://sequent.herokuapp.com" ><i class="fa fa-share-alt" aria-hidden="true" style="color: #783B00"></i> Share <img src="/kwote.svg" height="18" style="margin-top: -9px;" alt="" /></a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#" id="signOut"><i class="fa fa-sign-out" style="color: #783B00;" aria-hidden="true"></i> Logout</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/versions" id="versionInfo" style="padding-left: 18px;"><i class="fa fa-thumb-tack" aria-hidden="true" style="color: #783B00; width: 14px; text-align: center;"></i> Version 1.0.0</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>    
+</template>

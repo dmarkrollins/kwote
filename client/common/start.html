@@ -1,0 +1,33 @@
+<template name="start">
+    <div class="header">
+        <div class="centerForm" style="padding: 7px;">
+            <div style="max-width: 500px; margin: 0 auto; padding: 20px; border: 0px solid #999;">
+                <p style="color: #783B00;">
+                    <b>"Life itself is a quotation"</b> - <span style="color: rgb(141, 96, 50);">Jorge Luis Borges</span>
+                </p>
+                <div style="max-width: 80%; margin: 0 auto;">
+                    <form id="start-form">
+                        <fieldset id="start-fs">
+                            <div class="form-group">
+                                <input type="text" class="form-control inputField" id="userName" placeholder="User Name" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control inputField" id="password" placeholder="Password" autocomplete="off">
+                            </div>
+                            <p>
+                                <span id="errorMessage" class="error-message">{{errMessage}}</span>
+                            </p>
+                            <div>
+                                <a id="btnNewTeam" href="/newaccount" class="pull-left" style="margin-top: 15px; font-size: 1.05em; text-decoration: underline; margin-left: 7px;">Create New Account</a>
+                                <button type="submit" class="btn btn-success pull-right" id="btnNext">Sign In <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <div style="margin-top: 33px;">
+                        <button class="btn btn-primary" style="color: #f8f8f8;">What can <img src="kwote-w.png" alt="" height="20" style="margin-top: -10px;" /> do for me?</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

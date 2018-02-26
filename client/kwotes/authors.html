@@ -1,0 +1,21 @@
+<template name="authors">
+
+    <div class="container">
+        {{> header}}
+        
+        <div class="row">
+            <div class="col-xs-6">
+                <img src="/author.svg" style="margin-right: 9px; margin-top: -7px;" alt="" width="32"/><h3 style="display: inline-block; margin-top: 21px;" > Authors</h3>
+            </div>
+            <div class="col-xs-6">
+                <button id="btnProject" class="btn btn-primary pull-right" style="margin-top: 12px;"><i class="fa fa-plus-circle"></i> New</button>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-xs-12">
+                {{> authorList}}
+            </div>
+        </div>
+    </div>
+</template>
