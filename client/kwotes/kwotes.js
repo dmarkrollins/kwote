@@ -1,4 +1,5 @@
 import { Template } from 'meteor/templating'
+import { FlowRouter } from 'meteor/kadira:flow-router'
 import { Kwote } from '../../lib/kwote'
 
 Template.kwotes.helpers({
@@ -7,5 +8,11 @@ Template.kwotes.helpers({
     },
     editCreate() {
         return false
+    }
+})
+
+Template.kwotes.events({
+    'click #btnNewKwote': function (event, instance) {
+        FlowRouter.go('/kwotes/add')
     }
 })
