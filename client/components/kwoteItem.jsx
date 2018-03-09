@@ -3,56 +3,32 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
-import { Editor, EditorState, RichUtils } from 'draft-js';
+import Trumbowyg from 'react-trumbowyg'
 
 import { Kwote } from '../../lib/kwote'
+
 import '../../client/utils'
-import '../../node_modules/react-select/dist/react-select.min.css';
+import '../../node_modules/react-select/dist/react-select.min.css'
+import '../../node_modules/react-trumbowyg/dist/trumbowyg.min.css'
 
 class KwoteItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            editorState: this.props.kwote.body,
-            kwote: this.props.kwote,
+            kwote: Object.assign({}, this.props.kwote),
             titleError: 'form-control',
-            bodyError: '',
+            bodyError: '', // eslint-disable-line
             errorMessage: ''
         };
         this.saveClick = this.saveClick.bind(this)
         this.cancelClick = this.cancelClick.bind(this)
         this.handleTitleChange = this.handleTitleChange.bind(this)
         this.categoryChanged = this.categoryChanged.bind(this)
-        this.bodyChanged = this.bodyChanged.bind(this)
         this.isOptionUnique = this.isOptionUnique.bind(this)
         this.projectChanged = this.projectChanged.bind(this)
         this.authorChanged = this.authorChanged.bind(this)
         this.manageAuthors = this.manageAuthors.bind(this)
-        this.manageProjects = this.manageProjects.bind(this)
-        this.setBlockStyle = this.setBlockStyle.bind(this)
-        this.setInlineStyle = this.setInlineStyle.bind(this)
-        // this.handleKeyCommand = this.handleKeyCommand.bind(this)
-    }
-
-    setBlockStyle(blockStyle) {
-        const newState = RichUtils.toggleBlockType(this.state.editorState, blockStyle)
-        this.setState({ editorState: newState })
-    }
-
-    setInlineStyle(inlineStyle) {
-        const newState = RichUtils.toggleInlineStyle(this.state.editorState, inlineStyle)
-        this.setState({ editorState: newState })
-    }
-
-    handleKeyCommand = (keyCommand) => {
-        const newState = RichUtils.handleKeyCommand(this.state.editorState, keyCommand)
-
-        if (newState) {
-            this.setState({ editorState: newState })
-            return 'handled'
-        }
-
-        return 'not-handled'
+        this.editorChanged = this.editorChanged.bind(this)
     }
 
     formIsValid() {
@@ -65,10 +41,10 @@ class KwoteItem extends Component {
         }
 
         if (this.state.kwote.body === '') {
-            this.setState({ bodyError: 'form-error' })
+            this.props.handleBodyError(true)
             hasError += 1
         } else {
-            this.setState({ bodyError: '' })
+            this.props.handleBodyError(false)
         }
 
         this.setState({ errorMessage: hasError > 0 ? 'Required Kwote information missing!' : '' })
@@ -107,13 +83,13 @@ class KwoteItem extends Component {
 
     categoryChanged(values) {
         var uniqueList = _.uniq(values, function (item) {
-            return item.value.toProperCase();
+            return item.value.toProperCase()
         });
 
         const newValues = _.map(uniqueList, function (item) {
-            item.value = item.value.toProperCase();
-            item.label = item.label.toProperCase();
-            return item;
+            item.value = 'placeholder'
+            item.label = item.label.toProperCase()
+            return item
         })
 
         const { kwote } = this.state
@@ -121,19 +97,15 @@ class KwoteItem extends Component {
         this.setState({ kwote })
     }
 
-    bodyChanged(editorState) {
-        this.setState({ editorState })
-    }
-
     projectChanged(projects) {
         var uniqueList = _.uniq(projects, function (item) {
-            return item.value.toProperCase();
+            return item.value.toProperCase()
         });
 
         const newValues = _.map(uniqueList, function (item) {
-            item.value = item.value.toProperCase();
-            item.label = item.label.toProperCase();
-            return item;
+            item.value = 'placeholder'
+            item.label = item.label.toProperCase()
+            return item
         })
 
         const { kwote } = this.state
@@ -142,7 +114,7 @@ class KwoteItem extends Component {
     }
 
     authorChanged(author) {
-        const { kwote } = this.state;
+        const { kwote } = this.state
         kwote.author = author
         this.setState({ kwote })
     }
@@ -152,13 +124,20 @@ class KwoteItem extends Component {
         // navigate to new author
     }
 
-    manageProjects() {
-        // collect values into session object
-        // navigate to new project
+    editorButtons() {
+        return [
+            ['formatting'],
+            ['strong', 'em', 'underline'],
+            ['justifyLeft', 'justifyCenter'],
+            ['unorderedList', 'orderedList'],
+            ['fullscreen']
+        ]
     }
 
-    hasError(fieldName) {
-
+    editorChanged(event) {
+        const { kwote } = this.state
+        kwote.body = event.target.innerHTML
+        this.setState({ kwote })
     }
 
     render() {
@@ -245,22 +224,16 @@ class KwoteItem extends Component {
 
                     <div className="form-group">
                         <label>Kwote Body</label><br />
-                        <div className="btn-group" role="group" >
-                            <button className="btn btn-secondary" id="bold" onClick={() => this.setInlineStyle('BOLD')}><i className="fa fa-bold" style={{ fontSize: '.833em' }} /></button>
-                            <button className="btn btn-secondary" id="italic" onClick={() => this.setInlineStyle('ITALIC')}><i className="fa fa-italic" style={{ fontSize: '.833em' }} /></button>
-                            <button className="btn btn-secondary" id="underline" onClick={() => this.setInlineStyle('UNDERLINE')}><i className="fa fa-underline" style={{ fontSize: '.833em' }} /></button>
-                            <button className="btn btn-secondary" id="unorderedList" onClick={() => this.setBlockStyle('unordered-list-item')}><i className="fa fa-list-ul" style={{ fontSize: '.833em' }} /></button>
-                            <button className="btn btn-secondary" id="orderedList" onClick={() => this.setBlockStyle('ordered-list-item')}><i className="fa fa-list-ol" style={{ fontSize: '.833em' }} /></button>
-                        </div>
-                        <div className="editor">
-                            <Editor
-                                editorState={this.state.editorState}
-                                onChange={this.bodyChanged}
-                                className={this.state.bodyError}
-                                spellCheck={true}
-                                handleKeyCommand={this.handleKeyCommand}
-                            />
-                        </div>
+                        <Trumbowyg
+                            id="kwote"
+                            data={this.props.kwote.body}
+                            placeholder="Paste or enter Kwote here"
+                            autogrow={false}
+                            imageWidthModalEdit={true}
+                            buttons={this.editorButtons()}
+                            onChange={this.editorChanged}
+                            className={this.state.bodyError}
+                        />
                     </div>
 
                     <div style={{ width: '100%', color: '#990000', textAlign: 'center' }}>
@@ -289,6 +262,7 @@ class KwoteItem extends Component {
 KwoteItem.propTypes = {
     handleSave: PropTypes.func.isRequired,
     handleCancel: PropTypes.func.isRequired,
+    handleBodyError: PropTypes.func.isRequired,
     projects: PropTypes.array,
     authors: PropTypes.array,
     categories: PropTypes.array,
@@ -298,14 +272,14 @@ KwoteItem.propTypes = {
 KwoteItem.defaultProps = {
     kwote: {
         title: '',
-        body: EditorState.createEmpty(),
+        body: '',
         categories: [],
         projects: [],
         author: ''
     },
-    projects: [{ value: 'Project 1', label: 'Project 1' }, { value: 'Project 2', label: 'Project 2' }, { value: 'Project 3', label: 'Project 3' }],
-    authors: [{ value: 'Author 1', label: 'Author 1' }, { value: 'Author 2', label: 'Author 2' }, { value: 'Author 3', label: 'Author 3' }],
-    categories: [{ value: 'Category 1', label: 'Category 1' }]
+    projects: [],
+    authors: [],
+    categories: []
 }
 
-module.exports = KwoteItem;
+module.exports = KwoteItem

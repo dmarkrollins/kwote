@@ -196,32 +196,6 @@ div.multi-selector span.Select-value {
     border: 1px solid #bbb !important;
 }
 
-div.ql-toolbar {
-    border-top-left-radius: 4px !important;
-    border-top-right-radius: 4px !important;
-}
-
-div.ql-container {
-    border-bottom-left-radius: 4px !important;
-    border-bottom-right-radius: 4px !important;
-}
-
-
-.ql-editor {
-    min-height: 150px;
-    caret-color: #000;
-}
-
-div.ql-blank {
-    color: #ddd !important;
-    font-weight: 400 !important;
-    font-style: normal !important;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
-    opacity: 0.4;
-    caret-color: #000;
-}
-
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #ccc;
     opacity: 1; /* Firefox */
@@ -233,9 +207,11 @@ div.ql-blank {
     border-radius: 4px; 
 }
 
-.editor {
-    border: 1px solid #ccc;
-    padding: 6px;
-    border-radius: 4px;
-    min-height: 100px;
+.trumbowyg-box {
+    border-radius: 4px !important;
+    min-height: 165px !important;
+}
+
+.trumbowyg-editor {
+    min-height: 150px !important;
 }
