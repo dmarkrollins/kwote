@@ -19,7 +19,6 @@ shell-server@0.3.0            # Server-side component of the `meteor shell` comm
 kadira:flow-router
 aldeed:simple-schema
 aldeed:collection2
-chrismbeckett:toastr
 accounts-password
 sacha:spin
 kadira:blaze-layout

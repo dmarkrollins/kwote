@@ -4,7 +4,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router'
 import { toastr } from 'meteor/chrismbeckett:toastr'
 import { $ } from 'meteor/jquery'
 
-import { Kwote } from '../../lib/kwote'
+import { Kwote, Projects, Categories, Authors } from '../../lib/kwote'
 import { Logger } from '../../lib/logger'
 
 import './kwote-add.html'
@@ -15,7 +15,7 @@ Template.kwoteAdd.onCreated(function () {
     self.handleCancel = () => FlowRouter.go('/kwotes')
 
     self.CreateKwote = (kwote) => {
-        console.log(JSON.stringify(kwote))
+        // console.log(JSON.stringify(kwote))
         Meteor.call('createKwote', kwote, function (err, response) {
             if (err) {
                 toastr.error(err.message)
@@ -56,13 +56,13 @@ Template.kwoteAdd.helpers({
         }
     },
     projectItems() {
-        return []
+        return Projects.find().fetch()
     },
     cagtegoryItems() {
-        return []
+        return Categories.find().fetch()
     },
     authorItems() {
-        return []
+        return Authors.find().fetch()
     }
 
 })

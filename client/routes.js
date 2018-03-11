@@ -22,10 +22,10 @@ FlowRouter.route('/newaccount', {
 })
 
 FlowRouter.route('/kwotes', {
-    // subscriptions: function (params) {
-    //     this.register('quotes', Meteor.subscribe('myQuotes'))
-    //     this.register('projects', Meteor.subscribe('myProjects'))
-    // },
+    subscriptions: function (params) {
+        this.register('quotes', Meteor.subscribe('myQuotes'))
+        this.register('projects', Meteor.subscribe('myProjects'))
+    },
     action: function () {
         if (!Meteor.userId()) {
             FlowRouter.go('/')
@@ -36,10 +36,12 @@ FlowRouter.route('/kwotes', {
 })
 
 FlowRouter.route('/kwotes/add', {
-    // subscriptions: function (params) {
-    //     this.register('quotes', Meteor.subscribe('myQuotes'))
-    //     this.register('projects', Meteor.subscribe('myProjects'))
-    // },
+    subscriptions: function (params) {
+        this.register('quotes', Meteor.subscribe('myQuotes'))
+        this.register('projects', Meteor.subscribe('myProjects'))
+        this.register('categories', Meteor.subscribe('myCategories'))
+        this.register('authors', Meteor.subscribe('myAuthors'))
+    },
     action: function () {
         if (!Meteor.userId()) {
             FlowRouter.go('/')

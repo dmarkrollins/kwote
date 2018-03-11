@@ -36,15 +36,15 @@ Template.topMenu.events({
         })
     },
     'click #btnKwotes': function (event, instance) {
-        FlowRouter.go('kwotes')
+        FlowRouter.go('/kwotes')
     },
     'click #btnCategories': function (event, instance) {
-        FlowRouter.go('categories')
+        FlowRouter.go('/categories')
     },
     'click #btnProjects': function (event, instance) {
-        FlowRouter.go('projects')
+        FlowRouter.go('/projects')
     },
     'click #btnAuthors': function (event, instance) {
-        FlowRouter.go('authors')
+        FlowRouter.go('/authors')
     }
 })
