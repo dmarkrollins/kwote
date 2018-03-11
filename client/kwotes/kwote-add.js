@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { Template } from 'meteor/templating'
 import { FlowRouter } from 'meteor/kadira:flow-router'
-import { toastr } from 'meteor/chrismbeckett:toastr'
+import toastr from 'toastr'
 import { $ } from 'meteor/jquery'
 
 import { Kwote, Projects, Categories, Authors } from '../../lib/kwote'
