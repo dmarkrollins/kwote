@@ -23,8 +23,8 @@ FlowRouter.route('/newaccount', {
 
 FlowRouter.route('/kwotes', {
     subscriptions: function (params) {
-        this.register('quotes', Meteor.subscribe('myQuotes'))
         this.register('projects', Meteor.subscribe('myProjects'))
+        this.register('categories', Meteor.subscribe('myCategories'))
     },
     action: function () {
         if (!Meteor.userId()) {
@@ -52,6 +52,9 @@ FlowRouter.route('/kwotes/add', {
 })
 
 FlowRouter.route('/categories', {
+    subscriptions: function (params) {
+        this.register('categories', Meteor.subscribe('myCategories'))
+    },
     action: function () {
         if (!Meteor.userId()) {
             FlowRouter.go('/')
@@ -62,6 +65,9 @@ FlowRouter.route('/categories', {
 })
 
 FlowRouter.route('/projects', {
+    subscriptions: function (params) {
+        this.register('projects', Meteor.subscribe('myProjects'))
+    },
     action: function () {
         if (!Meteor.userId()) {
             FlowRouter.go('/')
@@ -72,6 +78,9 @@ FlowRouter.route('/projects', {
 })
 
 FlowRouter.route('/authors', {
+    subscriptions: function (params) {
+        this.register('authors', Meteor.subscribe('myAuthors'))
+    },
     action: function () {
         if (!Meteor.userId()) {
             FlowRouter.go('/')
@@ -79,4 +88,17 @@ FlowRouter.route('/authors', {
         BlazeLayout.render('layout', { content: 'authors' });
     },
     name: 'authors'
+})
+
+FlowRouter.route('/authors/add', {
+    subscriptions: function (params) {
+        this.register('authors', Meteor.subscribe('myAuthors'))
+    },
+    action: function () {
+        if (!Meteor.userId()) {
+            FlowRouter.go('/')
+        }
+        BlazeLayout.render('layout', { content: 'authorAdd' });
+    },
+    name: 'new-author'
 })

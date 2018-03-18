@@ -215,3 +215,29 @@ div.multi-selector span.Select-value {
 .trumbowyg-editor {
     min-height: 150px !important;
 }
+
+.truncated-quote {
+    max-height: 64px;
+    width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.projectTag {
+    background-color: #954900;
+    font-size: .75em;
+    color: #fff;
+    border-radius: 2px; 
+    padding: 3px 7px 3px 7px;
+}
+
+.categoryTag {
+    background-color: #E17003;
+    font-size: .75em;
+    color: #fff;
+    border-radius: 2px; 
+    padding: 3px 7px 3px 7px;
+}

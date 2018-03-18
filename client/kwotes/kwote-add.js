@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { Template } from 'meteor/templating'
 import { FlowRouter } from 'meteor/kadira:flow-router'
+import { _ } from 'meteor/underscore'
 import toastr from 'toastr'
 import { $ } from 'meteor/jquery'
 
@@ -18,7 +19,7 @@ Template.kwoteAdd.onCreated(function () {
         // console.log(JSON.stringify(kwote))
         Meteor.call('createKwote', kwote, function (err, response) {
             if (err) {
-                toastr.error(err.message)
+                toastr.error(err.reason)
             } else {
                 toastr.info('Kwote created successfully')
                 FlowRouter.go('/kwotes')
@@ -48,18 +49,33 @@ Template.kwoteAdd.helpers({
     kwoteBodyErrorHandler() {
         const instance = Template.instance();
         return function (isError) {
+            // custom react component does not have built in way to set class
             if (isError) {
-                $('#kwote').addClass('form-error');
+                $('#kwote').addClass('form-error')
             } else {
                 $('#kwote').removeClass('form-error')
             }
         }
     },
     projectItems() {
-        return Projects.find().fetch()
+        const retval = []
+        _.map(Projects.find().fetch(), function (item) {
+            const obj = {}
+            obj.label = item.title
+            obj.value = item._id
+            retval.push(obj)
+        })
+        return retval
     },
-    cagtegoryItems() {
-        return Categories.find().fetch()
+    categoryItems() {
+        const retval = []
+        _.map(Categories.find().fetch(), function (item) {
+            const obj = {}
+            obj.label = item.title
+            obj.value = item._id
+            retval.push(obj)
+        })
+        return retval
     },
     authorItems() {
         return Authors.find().fetch()

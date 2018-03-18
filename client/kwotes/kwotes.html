@@ -2,31 +2,25 @@
 
     <div class="container">
 
-        {{#if editCreate}}
-            <div class="row">
-                <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-                    {{> React component=kwoteItem }}
-                </div>
+        <div class="row" style="margin-top: 21px; margin-bottom: 21px;">
+            <div class="col-sm-1 hidden-xs"></div>
+            <div class="col-xs-7 col-sm-6 pull-left" style="font-size: 20pt;">
+                <a href="#" id="btnNewKwote" alt=""><img src="/new-item.png" width="32" style="margin-top: -5px;" /></a>  My Kwotes
             </div>
-        {{else}}
-            {{> header}}
-
-            <div class="row">
-                <div class="col-xs-6">
-                    <img src="/quote.svg" style="margin-right: 7px; margin-top: 0;" alt="" height="38px"/><h3 style="display: inline-block; margin-top: 21px;" > My Kwotes</h3>
-                </div>
-                <div class="col-xs-6">
-                    <button id="btnNewKwote" class="btn btn-primary pull-right" style="margin-top: 12px;"><i class="fa fa-plus-circle"></i> New</button>
-                </div>
+            <div class="col-xs-5 hidden-sm hidden-md hidden-lg">
+                <input id="searchBox" type="search" class="form-control" placeholder="Search">
             </div>
+            <div class="col-sm-4 hidden-xs">
+                <input id="searchBox" type="search" class="form-control" placeholder="Search by title, project, category">
+            </div>        
+        </div>
 
-            <div class="row">
-                <div class="col-xs-12">
-                    {{> kwotesList}}
-                </div>
+        <div class="row">
+            <div class="col-xs-12">
+                {{> kwotesList}}
             </div>
+        </div>
 
-        {{/if}}
     </div>
 
 </template>

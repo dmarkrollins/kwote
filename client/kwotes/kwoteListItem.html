@@ -1,0 +1,44 @@
+<template name="kwoteListItem">
+
+    <tr>
+        <td></td>
+    </tr>
+    <div class="row" style="margin-top: 12px; margin-bottom: 12px;">
+
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 kwote-list-item" id="itemDiv" style="margin-top: -7px; padding-bottom: 12px; border-bottom: 1px solid #ddd;">
+
+            <div class="row">
+                <div class="col-xs-8">
+                    <b style="color: #444; font-size: 1.2em">{{title}}</b>
+                </div>
+                <div class="col-xs-4 pull-right" style="color: #ccc; font-size: .9em;">
+                    <div style="width: 100px; white-space: nowrap; float: right;">
+                        <a href="#" id="btnCopy" style="margin-right: 21px;" ><img src="/copy-on.png" height="18" alt="" style="opacity: .7;" /></a>
+                        <a href="#" id="btnEdit" style="margin-right: 21px;" ><img src="/edit-on.png" height="18" alt="" style="opacity: .7;" /></a>
+                        <a href="#" id="btnDelete" style="margin-right: 21px;" ><img src="/trash-on.png" height="18" alt="" style="opacity: .7;" /></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin: 0px 0px 7px 0px;">
+                <div class="col-xs-12" style="font-size: 1em; padding: 20px 20px 7px 0px; max-height: 100px; overflow-y: scroll;">
+                    {{quoteBody}}
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 12px; margin-bottom: 12px;">
+                <div class="col-xs-12">
+                    {{> kwoteTags this}}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <span style="color: #ccc; font-size: .8em;"><em>Last Modified: {{lastModified}}</em></span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</template>

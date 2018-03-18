@@ -11,10 +11,10 @@ Template.topMenu.helpers({
         return Meteor.userId() ? '/quote-w.png' : '/quote-b.png'
     },
     categoryImg() {
-        return Meteor.userId() ? '/category-w.png' : '/category-b.png'
+        return Meteor.userId() ? '/category-b.png' : '/category-b.png'
     },
     projectImg() {
-        return Meteor.userId() ? '/project-w.png' : '/project-b.png'
+        return Meteor.userId() ? '/project-b.png' : '/project-b.png'
     },
     authorImg() {
         return Meteor.userId() ? '/author-w.png' : '/author-b.png'

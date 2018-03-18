@@ -1,9 +1,10 @@
-/* global _ Brackets TIU  */
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import Trumbowyg from 'react-trumbowyg'
+import { $ } from 'meteor/jquery'
+import { _ } from 'meteor/underscore'
 
 import { Kwote } from '../../lib/kwote'
 
@@ -29,6 +30,8 @@ class KwoteItem extends Component {
         this.authorChanged = this.authorChanged.bind(this)
         this.manageAuthors = this.manageAuthors.bind(this)
         this.editorChanged = this.editorChanged.bind(this)
+        // console.log(this.props.projects)
+        // console.log(this.props.categories)
     }
 
     formIsValid() {
@@ -41,10 +44,12 @@ class KwoteItem extends Component {
         }
 
         if (this.state.kwote.body === '') {
-            this.props.handleBodyError(true)
+            // this.props.handleBodyError(true)
+            $('#kwoteBody').addClass('form-error')
             hasError += 1
         } else {
-            this.props.handleBodyError(false)
+            // this.props.handleBodyError(false)
+            $('#kwoteBody').removeClass('form-error')
         }
 
         this.setState({ errorMessage: hasError > 0 ? 'Required Kwote information missing!' : '' })
@@ -136,7 +141,7 @@ class KwoteItem extends Component {
 
     editorChanged(event) {
         const { kwote } = this.state
-        kwote.body = event.target.innerHTML
+        kwote.body = event.target.value
         this.setState({ kwote })
     }
 
@@ -148,7 +153,7 @@ class KwoteItem extends Component {
             <div className="row">
                 <div className="col-xs-12">
                     <div className="form-group">
-                        <label>Short Description / Title</label>
+                        <label>Short Description / Title *</label>
                         <input
                             type="text"
                             id="kwoteTitle"
@@ -197,7 +202,7 @@ class KwoteItem extends Component {
                     <div className="form-group multi-selector">
                         <label>Project Tags</label>
                         <Select.Creatable
-                            id="categorySelect"
+                            id="projectSelect"
                             multi={true}
                             options={this.props.projects}
                             onChange={this.projectChanged}
@@ -223,9 +228,9 @@ class KwoteItem extends Component {
                     </div>
 
                     <div className="form-group">
-                        <label>Kwote Body</label><br />
+                        <label>Kwote Body *</label><br />
                         <Trumbowyg
-                            id="kwote"
+                            id="kwoteBody"
                             data={this.props.kwote.body}
                             placeholder="Paste or enter Kwote here"
                             autogrow={false}
@@ -234,6 +239,12 @@ class KwoteItem extends Component {
                             onChange={this.editorChanged}
                             className={this.state.bodyError}
                         />
+                    </div>
+
+                    <div style={{
+                        width: '100%', color: '#ccc', fontSize: '.8em'
+                    }}>
+                        * required item
                     </div>
 
                     <div style={{ width: '100%', color: '#990000', textAlign: 'center' }}>
@@ -262,7 +273,6 @@ class KwoteItem extends Component {
 KwoteItem.propTypes = {
     handleSave: PropTypes.func.isRequired,
     handleCancel: PropTypes.func.isRequired,
-    handleBodyError: PropTypes.func.isRequired,
     projects: PropTypes.array,
     authors: PropTypes.array,
     categories: PropTypes.array,
@@ -271,6 +281,7 @@ KwoteItem.propTypes = {
 
 KwoteItem.defaultProps = {
     kwote: {
+        _id: '',
         title: '',
         body: '',
         categories: [],
