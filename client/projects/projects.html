@@ -1,0 +1,24 @@
+<template name="projects">
+    <div class="container">
+
+        <div class="row" style="margin-top: 21px; margin-bottom: 21px;">
+            <div class="col-sm-3 hidden-xs"></div>
+            <div class="col-xs-7 col-sm-3 pull-left" style="font-size: 20pt;">
+                <a href="#" id="btnNewProject" alt=""><img src="/new-item.png" width="32" style="margin-top: -5px;" /></a> Projects
+            </div>
+            <div class="col-xs-5 hidden-sm hidden-md hidden-lg">
+                <input id="searchBox" type="search" class="form-control" placeholder="Search" value={{searchValue}} >
+            </div>
+            <div class="col-sm-3 hidden-xs">
+                <input id="searchBox" type="search" class="form-control" placeholder="Search by name" value={{searchValue}}>
+            </div>        
+            <div class="col-sm-3 hidden-xs"></div>
+        </div>
+    
+        <div class="row">
+            <div class="col-xs-12">
+                {{> projectList}}
+            </div>
+        </div>
+    </div>    
+</template>

@@ -53,9 +53,6 @@ FlowRouter.route('/kwotes/add', {
 })
 
 FlowRouter.route('/categories', {
-    subscriptions: function (params) {
-        this.register('categories', Meteor.subscribe('myCategories'))
-    },
     action: function () {
         if (!Meteor.userId()) {
             FlowRouter.go('/')
@@ -66,9 +63,6 @@ FlowRouter.route('/categories', {
 })
 
 FlowRouter.route('/projects', {
-    subscriptions: function (params) {
-        this.register('projects', Meteor.subscribe('myProjects'))
-    },
     action: function () {
         if (!Meteor.userId()) {
             FlowRouter.go('/')

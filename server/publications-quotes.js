@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { _ } from 'meteor/underscore'
 
-import { Kwote, Quotes, Projects, Categories } from '../lib/kwote'
+import { Kwote, Quotes, Projects, Categories, Authors } from '../lib/kwote'
 
 Quotes._ensureIndex('createdBy', 1)
 Quotes._ensureIndex('title', 1)
@@ -33,11 +33,22 @@ Meteor.publish('myQuotes', function (search) {
         }
     ).fetch(), '_id')
 
+    const authorIds = _.pluck(Authors.find(
+        {
+            createdBy: Meteor.userId(),
+            lastName: { $regex: search.title, $options: 'i' }
+        },
+        {
+            fields: { _id: 1 }
+        }
+    ).fetch(), '_id')
+
     return Quotes.find(
         {
             createdBy: Meteor.userId(),
             $or: [
                 { title: { $regex: search.title, $options: 'i' } },
+                { author: { $in: authorIds } },
                 { categories: { $in: categoryIds } },
                 { projects: { $in: projectIds } }
             ]

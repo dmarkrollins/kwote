@@ -10,9 +10,18 @@ Meteor.publish('myCategories', function (search) {
         return null
     }
 
+    let searchVal
+
+    if (!search) {
+        searchVal = ''
+    } else {
+        searchVal = search
+    }
+
     return Categories.find(
         {
-            createdBy: Meteor.userId()
+            createdBy: Meteor.userId(),
+            title: { $regex: searchVal, $options: 'i' }
         },
         {
             sort: { title: 1 }

@@ -1,0 +1,50 @@
+<template name="categoryList">
+
+    {{#if hasCategories}}
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                <table class="table">
+                    <thead>
+                        <th style="font-size: .8em; padding-left: 14px;">Actions</th>
+                        <th>Category</th>
+                   </thead>
+                    <tbody>
+                        {{#if Template.subscriptionsReady}}
+                            {{#each category}}
+                                {{#if editMode}}
+                                    <tr>
+                                        <td colspan="2">
+                                            <input type='text' class="form-control" value="{{title}}">
+                                            <span class="pull-right" style="margin-top: 7px;">
+                                                <a href="#" id="btnSave" style="margin-left: 12px;">Save</a><a href="#" id="btnCancel" style="margin-left: 7px;">Cancel</a>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                {{else}}
+                                    <tr>
+                                        <td width="100">
+                                            <a href="#" id="btnEdit" style="margin-right: 21px;" ><img src="/edit-on.png" height="18" alt="" style="opacity: .7;" /></a>
+                                            <a href="#" id="btnDelete" style="margin-right: 21px;" ><img src="/trash-on.png" height="18" alt="" style="opacity: .7;" /></a>
+                                        </td>
+                                        <td style="padding-left: 0;"><a href="#" id="btnViewQuotes" title="Tap to view related quotes">{{title}}</a></td>
+                                    </tr>
+                                {{/if}}
+                            {{/each}}
+                        {{else}}
+                            <div class="vertical-center">
+                                {{> spinner}}
+                            </div>
+                        {{/if}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {{else}}
+        <div class="row">
+            <div class="col-xs-12 centerForm vertical-center helpText" style="max-width: 600px; font-weight: bold; color: #dcdcdc;">
+                To get started tap the 'New' button to create your first Category!
+            </div>
+        </div>
+    {{/if}}
+
+</template>
