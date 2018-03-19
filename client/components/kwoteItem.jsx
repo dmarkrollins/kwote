@@ -153,7 +153,7 @@ class KwoteItem extends Component {
             <div className="row">
                 <div className="col-xs-12">
                     <div className="form-group">
-                        <label>Short Description / Title *</label>
+                        <label>Search Description / Title *</label>
                         <input
                             type="text"
                             id="kwoteTitle"
@@ -166,37 +166,20 @@ class KwoteItem extends Component {
 
                     <div className="form-group">
                         <label>Author</label>
-                        <div style={{
-                            whiteSpace: 'nowrap',
-                            padding: '0',
-                            margin: '0',
-                            width: '100%',
-                            display: 'table'
-                        }}>
-                            <div style={{ display: 'table-cell' }}>
-                                <Select
-                                    id="authorSelect"
-                                    ref={(ref) => { this.select = ref; }}
-                                    onBlurResetsInput={false}
-                                    onSelectResetsInput={false}
-                                    autoFocus
-                                    options={this.props.authors}
-                                    clearable={false}
-                                    disabled={false}
-                                    value={this.state.kwote.author}
-                                    onChange={this.authorChanged}
-                                    searchable={true}
-                                    placeholder="Choose Author"
-                                />
-                            </div>
-                            <div style={{
-                                display: 'table-cell',
-                                width: '50px',
-                                textAlign: 'right'
-                            }}>
-                                <button id="btnAuthors" className="btn btn-primary" title="Tap to create new author" onClick={this.manageAuthors}><i className="fa fa-plus-circle" /></button>
-                            </div>
-                        </div>
+                        <Select
+                            id="authorSelect"
+                            ref={(ref) => { this.select = ref; }}
+                            onBlurResetsInput={false}
+                            onSelectResetsInput={false}
+                            autoFocus
+                            options={this.props.authors}
+                            clearable={false}
+                            disabled={false}
+                            value={this.state.kwote.author}
+                            onChange={this.authorChanged}
+                            searchable={true}
+                            placeholder="Choose Author"
+                        />
                     </div>
 
                     <div className="form-group multi-selector">

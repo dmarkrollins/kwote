@@ -78,6 +78,7 @@ Template.kwoteAdd.helpers({
     },
     authorItems() {
         const retval = []
+        retval.push({ label: 'Anonymous', value: '' })
         _.map(Authors.find().fetch(), function (item) {
             const obj = {}
             obj.label = `${item.firstName} ${item.lastName}`

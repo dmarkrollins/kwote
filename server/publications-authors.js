@@ -11,12 +11,20 @@ Meteor.publish('myAuthors', function (search) {
         return null
     }
 
+    let searchVal
+
+    if (!search) {
+        searchVal = ''
+    } else {
+        searchVal = search
+    }
+
     return Authors.find(
         {
             createdBy: Meteor.userId(),
             $or: [
-                { lastName: { $regex: search, $options: 'i' } },
-                { firstName: { $regex: search, $options: 'i' } }
+                { lastName: { $regex: searchVal, $options: 'i' } },
+                { firstName: { $regex: searchVal, $options: 'i' } }
             ]
         },
         {
