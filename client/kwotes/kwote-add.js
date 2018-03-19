@@ -16,7 +16,6 @@ Template.kwoteAdd.onCreated(function () {
     self.handleCancel = () => FlowRouter.go('/kwotes')
 
     self.CreateKwote = (kwote) => {
-        // console.log(JSON.stringify(kwote))
         Meteor.call('createKwote', kwote, function (err, response) {
             if (err) {
                 toastr.error(err.reason)
@@ -78,7 +77,14 @@ Template.kwoteAdd.helpers({
         return retval
     },
     authorItems() {
-        return Authors.find().fetch()
+        const retval = []
+        _.map(Authors.find().fetch(), function (item) {
+            const obj = {}
+            obj.label = `${item.firstName} ${item.lastName}`
+            obj.value = item._id
+            retval.push(obj)
+        })
+        return retval
     }
 
 })

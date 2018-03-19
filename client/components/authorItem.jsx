@@ -25,9 +25,17 @@ class AuthorItem extends Component {
     }
 
     formatDate(value) {
+        if (_.isUndefined(value)) {
+            return null
+        }
+
+        if (value === '') {
+            return null
+        }
+
         if (value) {
-            if (moment(value, 'MM/DD/YYYY').isValid()) {
-                return moment(value, 'MM/DD/YYYY').format('MM/DD/YYYY')
+            if (moment(value, 'YYYY-MM-DD').isValid()) {
+                return moment(value, 'YYYY-MM-DD').toDate()
             }
         }
         return ''
@@ -73,13 +81,13 @@ class AuthorItem extends Component {
 
     birthDateChanged(event) {
         const { author } = this.state
-        author.birthDate = this.formatDate(event.target.value)
+        author.birthDate = event.target.value
         this.setState({ author })
     }
 
     deathDateChanged(event) {
         const { author } = this.state
-        author.deathDate = this.formatDate(event.target.value)
+        author.deathDate = event.target.value
         this.setState({ author })
     }
 
@@ -87,6 +95,10 @@ class AuthorItem extends Component {
         const { author } = this.state
         author.comments = event.target.value
         this.setState({ author })
+    }
+
+    dateValue(value) {
+        return moment(value).format('YYYY-MM-DD')
     }
 
     saveClick() {
@@ -101,16 +113,6 @@ class AuthorItem extends Component {
 
             this.props.handleSave(author)
         }
-    }
-
-    birthDate() {
-        const { author } = this.state
-        return this.formatDate(author.birthDate)
-    }
-
-    deathDate() {
-        const { author } = this.state
-        return this.formatDate(author.deathDate)
     }
 
     cancelClick() {
@@ -150,7 +152,7 @@ class AuthorItem extends Component {
                             type="date"
                             id="birthDate"
                             className="form-control"
-                            value={this.birthDate()}
+                            value={this.dateValue(this.state.author.birthDate)}
                             onChange={this.birthDateChanged}
                         />
                     </div>
@@ -161,7 +163,7 @@ class AuthorItem extends Component {
                             type="date"
                             id="deathDate"
                             className="form-control"
-                            value={this.deathDate()}
+                            value={this.dateValue(this.state.author.deathDate)}
                             onChange={this.deathDateChanged}
                         />
                     </div>

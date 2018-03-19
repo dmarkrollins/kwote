@@ -25,6 +25,7 @@ FlowRouter.route('/kwotes', {
     subscriptions: function (params) {
         this.register('projects', Meteor.subscribe('myProjects'))
         this.register('categories', Meteor.subscribe('myCategories'))
+        this.register('authors', Meteor.subscribe('myAuthors'))
     },
     action: function () {
         if (!Meteor.userId()) {
@@ -78,9 +79,6 @@ FlowRouter.route('/projects', {
 })
 
 FlowRouter.route('/authors', {
-    subscriptions: function (params) {
-        this.register('authors', Meteor.subscribe('myAuthors'))
-    },
     action: function () {
         if (!Meteor.userId()) {
             FlowRouter.go('/')
@@ -102,3 +100,17 @@ FlowRouter.route('/authors/add', {
     },
     name: 'new-author'
 })
+
+FlowRouter.route('/authors/edit/:id', {
+    subscriptions: function (params) {
+        this.register('authors', Meteor.subscribe('singleAuthor', params.id))
+    },
+    action: function () {
+        if (!Meteor.userId()) {
+            FlowRouter.go('/')
+        }
+        BlazeLayout.render('layout', { content: 'authorEdit' });
+    },
+    name: 'kwote-add'
+})
+

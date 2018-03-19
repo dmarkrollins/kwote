@@ -4,6 +4,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router'
 import { Session } from 'meteor/session'
 import { ReactiveVar } from 'meteor/reactive-var'
 import { _ } from 'meteor/underscore'
+import { $ } from 'meteor/jquery'
 import moment from 'moment'
 import { Kwote, Quotes, Projects } from '../../lib/kwote'
 
@@ -73,11 +74,11 @@ Template.kwotesList.events({
         Session.set(Kwote.KwoteSearchKey, search)
 
         $('html, body').animate(
-            { 
+            {
                 scrollTop: $('#btnMore').offset().top // $(document).height()-$(window).height()},
-            },  
-            750, 
-            "swing"
+            },
+            750,
+            'swing'
         );
     }
 })

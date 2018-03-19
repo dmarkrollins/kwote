@@ -141,7 +141,7 @@ class KwoteItem extends Component {
 
     editorChanged(event) {
         const { kwote } = this.state
-        kwote.body = event.target.value
+        kwote.body = event.target.innerHTML
         this.setState({ kwote })
     }
 

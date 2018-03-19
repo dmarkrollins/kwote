@@ -10,6 +10,10 @@ Template.kwotes.helpers({
     },
     editCreate() {
         return false
+    },
+    searchValue() {
+        const search = Session.get(Kwote.KwoteSearchKey)
+        return search.title || ''
     }
 })
 

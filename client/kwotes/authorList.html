@@ -1,30 +1,39 @@
 <template name="authorList">
 
     {{#if hasAuthors}}
-        <table class="table">
-            <thead>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Comments</th>
-            </thead>
-            <tbody>
-                {{#if Template.subscriptionsReady }}
-                    {{#each author}}
-                        <tr>
-                            <td>
-                                <button class="btn btn-primary"><i class="fa fa-edit"></i></button>
-                                <button class="btn btn-danger"><i class="fa fa-delete"></i></button>
-                            </td>
-                            <td><a href="#" id="btnTitle">{{firstName}}</a></td>
-                            <td class="hidden-xs">{{lastName}}</td>
-                            <td class="hidden-xs">{{comments}}</td>
-                        </tr>
-                    {{/each}}
-                {{else}}
-                    {{> spinner}}
-                {{/if}}
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                <table class="table">
+                    <thead>
+                        <th width="100" style="font-size: .8em; padding-left: 17px;">Actions</th>
+                        <th>Name</th>
+                        <th class="hidden-xs">Years Lived</th>
+                        <th class="hidden-xs">Comments</th>
+                    </thead>
+                    <tbody>
+                        {{#if Template.subscriptionsReady }}
+                            {{#each author}}
+                                <tr>
+                                    <td width="100">
+                                        <a href="#" id="btnEdit" style="margin-right: 21px;" ><img src="/edit-on.png" height="18" alt="" style="opacity: .7;" /></a>
+                                        <a href="#" id="btnDelete" style="margin-right: 21px;" ><img src="/trash-on.png" height="18" alt="" style="opacity: .7;" /></a>
+                                    </td>
+                                    <td style="padding-left: 0"><a href="#" id="btnLastName">{{firstName}} {{lastName}}</a></td>
+                                    <td class="hidden-xs" style="padding-left: 0">{{birthDateText}} - {{deathDateText}}</td>
+                                    <td class="hidden-xs ellipsis_cell" style="padding-left: 0">
+                                        <div title="Edit to see full comments">
+                                            <span>{{comments}}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {{/each}}
+                        {{else}}
+                            {{> spinner}}
+                        {{/if}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     {{else}}
         <div class="row">
             <div class="col-xs-12 centerForm vertical-center helpText" style="max-width: 600px; font-weight: bold; color: #dcdcdc;">
