@@ -2,7 +2,7 @@
 
 If you're an author and you collect quotations, sayings, conversation snippets etc. to support your writing habit, then Kwote might come in handy.
 
-It's mobile friendly so you can take Kwote with you wherever you go to make user you can file new items away for safe keeping right when you encounter them.
+It's mobile friendly so take Kwote with you wherever you go to capture new items at the moment you encounter them.
 
 ## Core Features
 
@@ -14,12 +14,11 @@ It's mobile friendly so you can take Kwote with you wherever you go to make user
 
 ## Credits
 
-Treeview - https://github.com/alexcurtis/react-treebeard
+react-select - https://github.com/JedWatson/react-select
+react-trumbowyg - https://github.com/RD17/react-trumbowyg
 
 Ben Davis - The Noun Project
 juli - The Noun Project
 Vicons Design - The Noun Project
 Joe Davies - The Noun Project
 krishna - The Noun Project
-
-https://www.sessions.edu/color-calculator/
