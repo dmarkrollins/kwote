@@ -14,11 +14,11 @@ It's mobile friendly so take Kwote with you wherever you go to capture new items
 
 ## Credits
 
-react-select - https://github.com/JedWatson/react-select
-react-trumbowyg - https://github.com/RD17/react-trumbowyg
+- react-select - https://github.com/JedWatson/react-select
+- react-trumbowyg - https://github.com/RD17/react-trumbowyg
 
-Ben Davis - The Noun Project
-juli - The Noun Project
-Vicons Design - The Noun Project
-Joe Davies - The Noun Project
-krishna - The Noun Project
+- Ben Davis - The Noun Project
+- juli - The Noun Project
+- Vicons Design - The Noun Project
+- Joe Davies - The Noun Project
+- krishna - The Noun Project
