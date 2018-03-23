@@ -8,8 +8,8 @@ import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai'
 import moment from 'moment'
-import { Quotes } from '../../lib/kwote'
 import { Logger } from '../../lib/logger'
+import { Quotes } from '../../lib/kwote'
 
 import { TestData } from '../testData'
 
@@ -17,9 +17,9 @@ const should = chai.should();
 chai.use(sinonChai);
 
 if (Meteor.isServer) {
-    import '../../lib/method-createKwote.js'
+    import '../../lib/method-updateKwote.js'
 
-    describe('Create Kwote Method', function () {
+    describe('Update Kwote Method', function () {
         let userId
         let sandbox
         let subject
@@ -27,7 +27,7 @@ if (Meteor.isServer) {
         beforeEach(function () {
             sandbox = sinon.createSandbox()
             userId = Random.id()
-            subject = Meteor.server.method_handlers.createKwote;
+            subject = Meteor.server.method_handlers.updateKwote;
         });
 
         afterEach(function () {
@@ -48,11 +48,11 @@ if (Meteor.isServer) {
             expect(msg, 'should throw not logged in').to.be.equal('You must be authenticated to perform this action! [not-logged-in]');
         })
 
-        it('checks for dups', function () {
+        it('checks for not found', function () {
             const context = { userId: userId };
             let msg = '';
             const fakeQuote = TestData.fakeQuote()
-            sandbox.stub(Quotes, 'findOne').returns(fakeQuote)
+            sandbox.stub(Quotes, 'findOne').returns(null)
 
             try {
                 const resultId = subject.apply(context, [fakeQuote]);
@@ -60,17 +60,20 @@ if (Meteor.isServer) {
                 msg = error.message;
             }
 
-            expect(msg, 'should throw dup error').to.be.equal('You\'ve already created a Kwote with this title! [duplicate-found]');
+            expect(msg, 'should throw not found error').to.be.equal('Kwote does not exist - cannot be updated! [not-found]');
         })
 
-        it('inserts new quote correctly - stubbed', function () {
+        it('updates quote correctly - stubbed', function () {
             const context = { userId: userId };
             let msg = '';
-            const newId = Random.id()
+            const qId = Random.id()
             let resultId = ''
             const fakeQuote = TestData.fakeQuote()
-            sandbox.stub(Quotes, 'findOne').returns(null)
-            sandbox.stub(Quotes, 'insert').returns(newId)
+            fakeQuote._id = qId
+            fakeQuote.projects = [{ label: 'fake-label', value: Random.id() }]
+            fakeQuote.categories = [{ label: 'fake-label', value: Random.id() }, { label: 'fake-label2', value: Random.id() }]
+            sandbox.stub(Quotes, 'findOne').returns(fakeQuote)
+            sandbox.stub(Quotes, 'update')
 
             try {
                 resultId = subject.apply(context, [fakeQuote]);
@@ -78,23 +81,23 @@ if (Meteor.isServer) {
                 msg = error.message;
             }
 
-            expect(resultId).to.equal(newId)
-            const params = Quotes.insert.args[0][0]
-            expect(params.title).to.equal(fakeQuote.title)
-            expect(params.author).to.equal(fakeQuote.author.value)
-            expect(params.projects.length).to.equal(0)
-            expect(params.categories.length).to.equal(0)
-            expect(params.body).to.equal(fakeQuote.body)
+            expect(resultId).to.equal(qId)
+            const params = Quotes.update.args[0][1]
+            expect(params.$set.title).to.equal(fakeQuote.title)
+            expect(params.$set.author).to.equal(fakeQuote.author.value)
+            expect(params.$set.projects.length).to.equal(1)
+            expect(params.$set.categories.length).to.equal(2)
+            expect(params.$set.body).to.equal(fakeQuote.body)
         })
 
-        it('handles insert error correctly', function () {
+        it('handles update error correctly', function () {
             const context = { userId: userId };
             let msg = '';
             const newId = Random.id()
             let resultId = ''
             const fakeQuote = TestData.fakeQuote()
-            sandbox.stub(Quotes, 'findOne').returns(null)
-            sandbox.stub(Quotes, 'insert').throws(TestData.fakeError())
+            sandbox.stub(Quotes, 'findOne').returns(fakeQuote)
+            sandbox.stub(Quotes, 'update').throws(TestData.fakeError())
             sandbox.stub(Logger, 'log')
 
             try {
@@ -104,7 +107,7 @@ if (Meteor.isServer) {
             }
 
             expect(Logger.log).to.have.been.called
-            expect(msg).to.equal('Kwote not created - please try again later!')
+            expect(msg).to.equal('Kwote not updated - please try again later!')
         })
     })
 }

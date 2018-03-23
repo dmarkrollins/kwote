@@ -98,6 +98,9 @@ class AuthorItem extends Component {
     }
 
     dateValue(value) {
+        if (!value) {
+            return ''
+        }
         return moment(value).format('YYYY-MM-DD')
     }
 
@@ -105,10 +108,10 @@ class AuthorItem extends Component {
         if (this.formIsValid()) {
             const { author } = this.state
             if (author.birthDate) {
-                author.birthDate = this.formatDate(author.birthDate)
+                author.birthDate = this.dateValue(author.birthDate)
             }
             if (author.deathDate) {
-                author.deathDate = this.formatDate(author.deathDate)
+                author.deathDate = this.dateValue(author.deathDate)
             }
 
             this.props.handleSave(author)

@@ -196,6 +196,27 @@ div.multi-selector span.Select-value {
     border: 1px solid #bbb !important;
 }
 
+/* multi select 2 */
+
+div.multi-selector2 span.Select-value-icon{
+    background-color: #E17003;
+    color: #fefefe;
+}
+
+div.multi-selector2 span.Select-value-icon:hover {
+    background-color: #E17003 !important;
+    color: #fefefe !important;
+}
+
+div.multi-selector2 span.Select-value-label {
+    background-color: #E17003;
+    color: #fefefe;
+}
+
+div.multi-selector2 span.Select-value {
+    border: 1px solid #bbb !important;
+}
+
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #ccc;
     opacity: 1; /* Firefox */

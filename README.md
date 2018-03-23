@@ -7,15 +7,22 @@ It's mobile friendly so take Kwote with you wherever you go to capture new items
 ## Core Features
 
 - Organize items by author, project and category and cross reference items across all three dimensions.
-- Search by author, project, category, title, or body of quote 
-- Share items you've captured with other Kwote users by making all or some of your stuff public. 
-- Copy items from Kwote and paste directly into your writing project. 
+- Search by author, project, category, title, or body of quote
+- Share items you've captured with other Kwote users by making all or some of your stuff public.
+- Copy items from Kwote and paste directly into your writing project.
 - Generate a bibliography of quotes used for a specific project.
+
+## Outstanding Items [WIP]
+
+- Links from Authors, Projects Categories nav to and filter Kwotes list
+- All Delete functionality
+- Kwote, Project, Category edit
+- Publication tests
 
 ## Credits
 
-- react-select - https://github.com/JedWatson/react-select
-- react-trumbowyg - https://github.com/RD17/react-trumbowyg
+- react-select - [https://github.com/JedWatson/react-select](https://github.com/JedWatson/react-select)
+- react-trumbowyg - [https://github.com/RD17/react-trumbowyg](https://github.com/RD17/react-trumbowyg)
 
 - Ben Davis - The Noun Project
 - juli - The Noun Project

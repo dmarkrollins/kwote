@@ -54,10 +54,16 @@ if (Meteor.isClient) {
             expect(wrapper.find('input#birthDate'), 'first name found').to.have.length(1)
             expect(wrapper.find('input#deathDate'), 'first name found').to.have.length(1)
             expect(wrapper.find('textarea#comments'), 'first name found').to.have.length(1)
+            expect(wrapper.find('input#firstName').get(0).props.value).to.equal('')
+            expect(wrapper.find('input#lastName').get(0).props.value).to.equal('')
+            expect(wrapper.find('textarea#comments').get(0).props.value).to.equal('')
+            expect(wrapper.find('input#birthDate').get(0).props.value).to.equal('')
+            expect(wrapper.find('input#deathDate').get(0).props.value).to.equal('')
+
             expect(wrapper.find('button'), 'should have 2 buttons').to.have.length(2)
         })
 
-        it('displays correctly with author object with dates', function () {
+        it('displays authoro object correctly with valid dates', function () {
             const fakeAuthor = {
                 _id: '',
                 firstName: 'fake first name',
@@ -76,11 +82,11 @@ if (Meteor.isClient) {
             expect(wrapper.find('input#firstName').get(0).props.value).to.equal('fake first name')
             expect(wrapper.find('input#lastName').get(0).props.value).to.equal('fake last name')
             expect(wrapper.find('textarea#comments').get(0).props.value).to.equal('fake comments')
-            expect(wrapper.find('input#birthDate').get(0).props.value).to.equal('12/01/2000')
-            expect(wrapper.find('input#deathDate').get(0).props.value).to.equal('12/01/2010')
+            expect(wrapper.find('input#birthDate').get(0).props.value).to.equal('2000-12-01')
+            expect(wrapper.find('input#deathDate').get(0).props.value).to.equal('2010-12-01')
         })
 
-        it('displays correctly with author object null dates', function () {
+        it('displays author object correctly with null dates', function () {
             const fakeAuthor = {
                 _id: '',
                 firstName: 'fake first name',
@@ -103,7 +109,7 @@ if (Meteor.isClient) {
             expect(wrapper.find('input#deathDate').get(0).props.value).to.equal('')
         })
 
-        it('displays correctly with author object no dates', function () {
+        it('displays author object correctly with no dates', function () {
             const fakeAuthor = {
                 _id: '',
                 firstName: 'fake first name',
@@ -197,8 +203,8 @@ if (Meteor.isClient) {
                 comments: 'fake comments',
                 lastName: 'fake last name',
                 firstName: 'fake first name',
-                birthDate: '12/01/2000',
-                deathDate: '12/01/2010'
+                birthDate: '2000-12-01',
+                deathDate: '2010-12-01'
             })
         })
 

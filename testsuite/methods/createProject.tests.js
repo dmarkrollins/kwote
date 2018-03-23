@@ -8,7 +8,7 @@ import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai'
 import moment from 'moment'
-import { Quotes } from '../../lib/kwote'
+import { Projects } from '../../lib/kwote'
 import { Logger } from '../../lib/logger'
 
 import { TestData } from '../testData'
@@ -17,9 +17,9 @@ const should = chai.should();
 chai.use(sinonChai);
 
 if (Meteor.isServer) {
-    import '../../lib/method-createKwote.js'
+    import '../../lib/method-createProject.js'
 
-    describe('Create Kwote Method', function () {
+    describe('Create Project Method', function () {
         let userId
         let sandbox
         let subject
@@ -27,11 +27,11 @@ if (Meteor.isServer) {
         beforeEach(function () {
             sandbox = sinon.createSandbox()
             userId = Random.id()
-            subject = Meteor.server.method_handlers.createKwote;
+            subject = Meteor.server.method_handlers.createProject;
         });
 
         afterEach(function () {
-            Quotes.remove({})
+            Projects.remove({})
             sandbox.restore()
         })
 
@@ -40,7 +40,7 @@ if (Meteor.isServer) {
             let msg = '';
 
             try {
-                const resultId = subject.apply(context, TestData.fakeQuote());
+                const resultId = subject.apply(context, []);
             } catch (error) {
                 msg = error.message;
             }
@@ -51,40 +51,37 @@ if (Meteor.isServer) {
         it('checks for dups', function () {
             const context = { userId: userId };
             let msg = '';
-            const fakeQuote = TestData.fakeQuote()
-            sandbox.stub(Quotes, 'findOne').returns(fakeQuote)
+            const doc = TestData.fakeProject()
+            sandbox.stub(Projects, 'findOne').returns(doc)
 
             try {
-                const resultId = subject.apply(context, [fakeQuote]);
+                const resultId = subject.apply(context, [doc]);
             } catch (error) {
                 msg = error.message;
             }
 
-            expect(msg, 'should throw dup error').to.be.equal('You\'ve already created a Kwote with this title! [duplicate-found]');
+            expect(msg, 'should throw dup error').to.be.equal('You\'ve already created a Project with this name! [duplicate-found]');
         })
 
-        it('inserts new quote correctly - stubbed', function () {
+        it('inserts new Project correctly - stubbed', function () {
             const context = { userId: userId };
             let msg = '';
             const newId = Random.id()
             let resultId = ''
-            const fakeQuote = TestData.fakeQuote()
-            sandbox.stub(Quotes, 'findOne').returns(null)
-            sandbox.stub(Quotes, 'insert').returns(newId)
+            const doc = TestData.fakeProject()
+            sandbox.stub(Projects, 'findOne').returns(null)
+            sandbox.stub(Projects, 'insert').returns(newId)
 
             try {
-                resultId = subject.apply(context, [fakeQuote]);
+                resultId = subject.apply(context, [doc]);
             } catch (error) {
                 msg = error.message;
             }
 
             expect(resultId).to.equal(newId)
-            const params = Quotes.insert.args[0][0]
-            expect(params.title).to.equal(fakeQuote.title)
-            expect(params.author).to.equal(fakeQuote.author.value)
-            expect(params.projects.length).to.equal(0)
-            expect(params.categories.length).to.equal(0)
-            expect(params.body).to.equal(fakeQuote.body)
+
+            const params = Projects.insert.args[0][0]
+            expect(params.title).to.equal(doc.title)
         })
 
         it('handles insert error correctly', function () {
@@ -92,19 +89,19 @@ if (Meteor.isServer) {
             let msg = '';
             const newId = Random.id()
             let resultId = ''
-            const fakeQuote = TestData.fakeQuote()
-            sandbox.stub(Quotes, 'findOne').returns(null)
-            sandbox.stub(Quotes, 'insert').throws(TestData.fakeError())
+            const doc = TestData.fakeProject()
+            sandbox.stub(Projects, 'findOne').returns(null)
+            sandbox.stub(Projects, 'insert').throws(TestData.fakeError())
             sandbox.stub(Logger, 'log')
 
             try {
-                resultId = subject.apply(context, [fakeQuote]);
+                resultId = subject.apply(context, [doc]);
             } catch (error) {
                 msg = error.reason;
             }
 
             expect(Logger.log).to.have.been.called
-            expect(msg).to.equal('Kwote not created - please try again later!')
+            expect(msg).to.equal('Project not created - please try again later!')
         })
     })
 }

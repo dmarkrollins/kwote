@@ -69,7 +69,7 @@ class KwoteItem extends Component {
 
     handleTitleChange(event) {
         const { kwote } = this.state
-        kwote.title = event.target.value
+        kwote.title = event.target.value.toProperCase()
         this.setState({ kwote })
     }
 
@@ -86,33 +86,30 @@ class KwoteItem extends Component {
         return !list
     }
 
-    categoryChanged(values) {
+    processSelectList(values) {
         var uniqueList = _.uniq(values, function (item) {
             return item.value.toProperCase()
         });
 
         const newValues = _.map(uniqueList, function (item) {
-            item.value = 'placeholder'
+            item.value = item.label === item.value ? 'placeholder' : item.value
+            // labal assign must be 2nd due to propercase messing up equal check
             item.label = item.label.toProperCase()
             return item
         })
 
+        return newValues
+    }
+
+    categoryChanged(values) {
+        const newValues = this.processSelectList(values)
         const { kwote } = this.state
         kwote.categories = newValues
         this.setState({ kwote })
     }
 
-    projectChanged(projects) {
-        var uniqueList = _.uniq(projects, function (item) {
-            return item.value.toProperCase()
-        });
-
-        const newValues = _.map(uniqueList, function (item) {
-            item.value = 'placeholder'
-            item.label = item.label.toProperCase()
-            return item
-        })
-
+    projectChanged(values) {
+        const newValues = this.processSelectList(values)
         const { kwote } = this.state
         kwote.projects = newValues
         this.setState({ kwote })
@@ -179,6 +176,7 @@ class KwoteItem extends Component {
                             onChange={this.authorChanged}
                             searchable={true}
                             placeholder="Choose Author"
+                            closeOnSelect={true}
                         />
                     </div>
 
@@ -192,11 +190,10 @@ class KwoteItem extends Component {
                             value={this.state.kwote.projects}
                             placeholder="Choose or enter a new project tag"
                             isOptionUnique={this.isOptionUnique}
-                            closeOnSelect={false}
                         />
                     </div>
 
-                    <div className="form-group multi-selector">
+                    <div className="form-group multi-selector2">
                         <label>Category Tags</label>
                         <Select.Creatable
                             id="categorySelect"
@@ -206,7 +203,6 @@ class KwoteItem extends Component {
                             value={this.state.kwote.categories}
                             placeholder="Choose or enter a new category tag"
                             isOptionUnique={this.isOptionUnique}
-                            closeOnSelect={false}
                         />
                     </div>
 
@@ -214,7 +210,7 @@ class KwoteItem extends Component {
                         <label>Kwote Body *</label><br />
                         <Trumbowyg
                             id="kwoteBody"
-                            data={this.props.kwote.body}
+                            data={this.state.kwote.body}
                             placeholder="Paste or enter Kwote here"
                             autogrow={false}
                             imageWidthModalEdit={true}

@@ -59,3 +59,9 @@ Meteor.publish('myQuotes', function (search) {
         }
     )
 })
+
+Meteor.publish('singleQuote', function (id) {
+    if (!Meteor.userId()) {
+        return null
+    }
+})

@@ -39,9 +39,49 @@ const TestData = {
         Quote.author = parms.author || { label: faker.name.title(), value: Random.id() }
         Quote.projects = parms.projects || []
         Quote.categories = parms.categories || []
-        Quote.body = parms.comments || 'fake body'
+        Quote.body = parms.body || 'fake body'
 
         return Quote
+    },
+
+    fakeError(message) {
+        const err = {}
+
+        err.error = 'error-occurred'
+        err.reason = message || 'fake reason'
+        err.details = 'fake details'
+
+        return err
+    },
+
+    fakeCategory(parameters) {
+        let parms = {}
+
+        if (!_.isUndefined(parameters)) {
+            parms = parameters
+        }
+
+        const doc = {}
+
+        doc.title = parms.title || faker.name.title()
+        doc.createdBy = parms.createdBy || Random.id()
+
+        return doc
+    },
+
+    fakeProject(parameters) {
+        let parms = {}
+
+        if (!_.isUndefined(parameters)) {
+            parms = parameters
+        }
+
+        const doc = {}
+
+        doc.title = parms.title || faker.name.title()
+        doc.createdBy = parms.createdBy || Random.id()
+
+        return doc
     }
 }
 
