@@ -44,7 +44,12 @@ Template.newAccount.events({
             return
         }
 
-        if (doc.password === '' || doc.password !== doc.confirmPassword) {
+        if (doc.password === '') {
+            instance.setMessage('Passwords required!')
+            return
+        }
+
+        if (doc.password !== doc.confirmPassword) {
             instance.setMessage('Passwords do not match!')
             return
         }

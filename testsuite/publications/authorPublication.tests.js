@@ -16,7 +16,7 @@ const should = chai.should();
 if (Meteor.isServer) {
     import '../../server/publications-authors.js'
 
-    describe('Author Publication', function () {
+    describe('Publication - Author', function () {
         let sandbox;
 
         beforeEach(function () {
@@ -28,7 +28,7 @@ if (Meteor.isServer) {
             Authors.remove({})
         });
 
-        it('authors published correctly', function (done) {
+        it('authors published - no search', function (done) {
             sandbox.stub(Meteor, 'userId').returns(Random.id())
 
             Authors.insert(TestData.fakeAuthor())
@@ -39,6 +39,24 @@ if (Meteor.isServer) {
                 // console.log('The collections', JSON.stringify(collections, null, 4));
                 const { authors } = collections
                 expect(authors).to.have.length(1)
+                done();
+            });
+        })
+
+        it('authors published - search', function (done) {
+            sandbox.stub(Meteor, 'userId').returns(Random.id())
+
+            Authors.insert(TestData.fakeAuthor({ lastName: 'White' }))
+            Authors.insert(TestData.fakeAuthor({ lastName: 'Whitely' }))
+            Authors.insert(TestData.fakeAuthor({ lastName: 'Red' }))
+            Authors.insert(TestData.fakeAuthor({ lastName: 'Blue' }))
+
+            const collector = new PublicationCollector()
+
+            collector.collect('myAuthors', 'white', (collections) => {
+                // console.log('The collections', JSON.stringify(collections, null, 4));
+                const { authors } = collections
+                expect(authors).to.have.length(2)
                 done();
             });
         })

@@ -11,6 +11,10 @@ Meteor.publish('myQuotes', function (search) {
         return null
     }
 
+    if (!search) {
+        search = { limit: Kwote.defaultLimit, title: '' }
+    }
+
     const dl = search.limit || Kwote.defaultLimit
 
     const projectIds = _.pluck(Projects.find(
