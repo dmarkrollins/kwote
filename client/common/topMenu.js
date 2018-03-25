@@ -22,8 +22,8 @@ Template.topMenu.helpers({
     cogImg() {
         return Meteor.userId() ? '/cog-w.png' : '/cog-b.png'
     },
-    notAllowed() {
-        return Meteor.userId() ? 'autoCursor' : 'notAllowedCursor'
+    isAuthenticated() {
+        return Meteor.userId() !== null
     }
 })
 

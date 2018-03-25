@@ -54,7 +54,6 @@ FlowRouter.route('/kwotes/add', {
 
 FlowRouter.route('/kwotes/edit/:id', {
     subscriptions: function (params) {
-        console.log('the edit params', params)
         this.register('singlequote', Meteor.subscribe('singleQuote', params.id))
         this.register('projects', Meteor.subscribe('myProjects'))
         this.register('categories', Meteor.subscribe('myCategories'))
@@ -123,5 +122,12 @@ FlowRouter.route('/authors/edit/:id', {
         BlazeLayout.render('layout', { content: 'authorEdit' });
     },
     name: 'kwote-add'
+})
+
+FlowRouter.route('/terms', {
+    action: function () {
+        BlazeLayout.render('layout', { content: 'termsOfUse' });
+    },
+    name: 'terms-of-use'
 })
 
