@@ -8,15 +8,7 @@ It's mobile friendly so take Kwote with you wherever you go to capture new items
 
 - Organize items by author, project and category and cross reference items across all three dimensions.
 - Search by author, project, category, title, or body of quote
-- Share items you've captured with other Kwote users by making all or some of your stuff public.
 - Copy items from Kwote and paste directly into your writing project.
-- Generate a bibliography of quotes used for a specific project.
-
-## Outstanding Items [WIP]
-
-- Add categories and projects
-- Links from Authors, Projects Categories nav to and filter Kwotes list
-- All Delete functionality
 
 ## Credits
 

@@ -2,6 +2,7 @@ import { Template } from 'meteor/templating'
 import { Meteor } from 'meteor/meteor'
 import { Spacebars } from 'meteor/spacebars'
 import { FlowRouter } from 'meteor/kadira:flow-router'
+import { $ } from 'meteor/jquery'
 import moment from 'moment'
 import toastr from 'toastr'
 
@@ -38,6 +39,11 @@ Template.kwoteListItem.helpers({
 
 Template.kwoteListItem.events({
     'click #btnCopy': function (event, instance) {
+        var $temp = $('<input>')
+        $('body').append($temp)
+        $temp.val(this.body).select()
+        document.execCommand('copy')  // eslint-disable-line
+        $temp.remove()
         toastr.success('Quote body text copied to clip board!')
     },
     'click #btnDelete': function (event, instance) {
