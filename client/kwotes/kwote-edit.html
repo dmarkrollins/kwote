@@ -10,23 +10,23 @@
     
             </div>
         </div>
-        
-        <div class="row">
-    
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
-    
-                {{> React component=kwoteItem
-                    handleSave=saveHandler
-                    handleCancel=cancelHandler
-                    projects=projectItems
-                    authors=authorItems
-                    categories=categoryItems
-                    kwote=kwoteObj
-                }}
-    
+
+        {{#if isReady}}        
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                    {{> React component=kwoteItem
+                        handleSave=saveHandler
+                        handleCancel=cancelHandler
+                        projects=projectItems
+                        authors=authorItems
+                        categories=categoryItems
+                        kwote=kwoteObj
+                    }}
+                </div>
             </div>
-    
-        </div>
+        {{else}}
+            {{> spinner}}
+        {{/if}}
 
     </div>    
         

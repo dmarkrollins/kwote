@@ -4,6 +4,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router'
 import { Session } from 'meteor/session'
 import { ReactiveVar } from 'meteor/reactive-var'
 import { _ } from 'meteor/underscore'
+import toastr from 'toastr'
 import moment from 'moment'
 
 import { Kwote, Authors } from '../../lib/kwote'
@@ -59,12 +60,17 @@ Template.authorList.events({
         const msg = `Are you sure you want permanently delete <b>${authorName}</b>? <br/><br/>All associated quote author references will be removed!`
 
         ConfirmDialog.showConfirmation(msg, title, 'danger', null, () => {
-            // Meteor.call('deleteAuthor', event.currentTarget.dataset.id, function (err) {
-            //     if (err) {
-            //         console.log(err)
-            //         toastr.error('Could not remove action - try again later')
-            //     }
-            // })
+            Meteor.call('deleteAuthor', this._id, function (err) {
+                if (err) {
+                    toastr.error(err.reason)
+                    return
+                }
+                toastr.info('Author removed successfully!')
+            })
         })
+    },
+    'click #btnViewQuotes': function (event, instance) {
+        Kwote.setKwoteSearchValue(this.lastName)
+        FlowRouter.go('/kwotes')
     }
 })

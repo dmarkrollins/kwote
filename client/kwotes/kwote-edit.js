@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { Template } from 'meteor/templating'
 import { FlowRouter } from 'meteor/kadira:flow-router'
+import { ReactiveVar } from 'meteor/reactive-var'
 import { _ } from 'meteor/underscore'
 import toastr from 'toastr'
 import { $ } from 'meteor/jquery'
@@ -20,11 +21,14 @@ Template.kwoteEdit.onCreated(function () {
             if (err) {
                 toastr.error(err.reason)
             } else {
-                toastr.info('Kwote created successfully')
+                toastr.success('Kwote updated successfully')
                 FlowRouter.go('/kwotes')
             }
         })
     }
+    self.autorun(function () {
+        console.log('subs are ready', FlowRouter.subsReady())
+    })
 })
 
 Template.kwoteEdit.helpers({
@@ -89,6 +93,13 @@ Template.kwoteEdit.helpers({
             retval.push(obj)
         })
         return retval
+    },
+    isReady() {
+        console.log('kwotes', FlowRouter.subsReady('singlequote'))
+        console.log('projects', FlowRouter.subsReady('projects'))
+        console.log('authors', FlowRouter.subsReady('authors'))
+        console.log('categories', FlowRouter.subsReady('categories'))
+        return FlowRouter.subsReady()
     }
 
 })

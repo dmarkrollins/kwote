@@ -13,7 +13,9 @@ Template.kwotes.helpers({
     },
     searchValue() {
         const search = Session.get(Kwote.KwoteSearchKey)
-        return search.title || ''
+        if (search) {
+            return search.title || ''
+        }
     }
 })
 

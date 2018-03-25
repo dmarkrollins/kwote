@@ -54,7 +54,8 @@ FlowRouter.route('/kwotes/add', {
 
 FlowRouter.route('/kwotes/edit/:id', {
     subscriptions: function (params) {
-        this.register('quotes', Meteor.subscribe('singleQuote', params.id))
+        console.log('the edit params', params)
+        this.register('singlequote', Meteor.subscribe('singleQuote', params.id))
         this.register('projects', Meteor.subscribe('myProjects'))
         this.register('categories', Meteor.subscribe('myCategories'))
         this.register('authors', Meteor.subscribe('myAuthors'))

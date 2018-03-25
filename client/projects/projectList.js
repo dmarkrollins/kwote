@@ -2,7 +2,9 @@ import { Template } from 'meteor/templating'
 import { Meteor } from 'meteor/meteor'
 import { ReactiveVar } from 'meteor/reactive-var'
 import { Session } from 'meteor/session'
-
+import { FlowRouter } from 'meteor/kadira:flow-router'
+import toastr from 'toastr'
+import { $ } from 'meteor/jquery'
 import { Kwote, Projects } from '../../lib/kwote'
 import { ConfirmDialog } from '../common/confirmDialog'
 
@@ -41,22 +43,38 @@ Template.projectList.events({
         const msg = `Are you sure you want to permanently delete project: <b>${this.title}</b>?`
 
         ConfirmDialog.showConfirmation(msg, title, 'danger', null, () => {
-            // Meteor.call('deleteAuthor', event.currentTarget.dataset.id, function (err) {
-            //     if (err) {
-            //         console.log(err)
-            //         toastr.error('Could not remove action - try again later')
-            //     }
-            // })
+            Meteor.call('deleteProject', this._id, function (err, response) {
+                if (err) {
+                    toastr.error(err.reason)
+                } else {
+                    toastr.info('Project removed successfully!')
+                }
+            })
         })
     },
     'click #btnEdit': function (event, instance) {
         instance.editId.set(this._id)
     },
     'click #btnSave': function (event, instance) {
-        instance.editId.set('')
+        const value = $('#editValue').val()
+        const doc = {}
+        doc._id = this._id
+        doc.title = value
+        Meteor.call('updateProject', doc, function (err, result) {
+            if (err) {
+                toastr.error(err.reason)
+                return
+            }
+            toastr.success('Project updated successfully!')
+            instance.editId.set('')
+        })
     },
     'click #btnCancel': function (event, instance) {
         instance.editId.set('')
+    },
+    'click #btnViewQuotes': function (event, instance) {
+        Kwote.setKwoteSearchValue(this.title)
+        FlowRouter.go('/kwotes')
     }
 
 })

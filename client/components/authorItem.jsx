@@ -69,13 +69,13 @@ class AuthorItem extends Component {
 
     firstNameChanged(event) {
         const { author } = this.state
-        author.firstName = event.target.value
+        author.firstName = event.target.value.toProperCase()
         this.setState({ author })
     }
 
     lastNameChanged(event) {
         const { author } = this.state
-        author.lastName = event.target.value
+        author.lastName = event.target.value.toProperCase()
         this.setState({ author })
     }
 

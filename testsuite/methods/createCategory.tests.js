@@ -73,7 +73,7 @@ if (Meteor.isServer) {
             sandbox.stub(Categories, 'insert').returns(newId)
 
             try {
-                resultId = subject.apply(context, [doc]);
+                resultId = subject.apply(context, [doc.title]);
             } catch (error) {
                 msg = error.message;
             }
@@ -95,7 +95,7 @@ if (Meteor.isServer) {
             sandbox.stub(Logger, 'log')
 
             try {
-                resultId = subject.apply(context, [doc]);
+                resultId = subject.apply(context, [doc.title]);
             } catch (error) {
                 msg = error.reason;
             }

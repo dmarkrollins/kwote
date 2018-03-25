@@ -13,13 +13,9 @@ Template.authorAdd.onCreated(function () {
             Meteor.call('createAuthor', author, function (err, result) {
                 if (err) {
                     toastr.error(err.reason)
-                }
-                FlowRouter.go('/authors')
-            })
-        } else {
-            Meteor.call('updateAuthor', author, function (err, result) {
-                if (err) {
-                    toastr.error(err.reason)
+                } else {
+                    toastr.success('Author added successfully!')
+                    FlowRouter.go('/authors')
                 }
             })
         }

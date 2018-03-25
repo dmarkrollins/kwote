@@ -108,7 +108,7 @@ if (Meteor.isServer) {
             expect(params.$set.title).to.equal(fakeProject.title)
         })
 
-        it('handles update error correctly', function () {
+        it('handles update error correctly - bad doc - no id', function () {
             const context = { userId: userId };
             let msg = '';
             const newId = Random.id()
@@ -124,8 +124,49 @@ if (Meteor.isServer) {
                 msg = error.reason;
             }
 
+            expect(msg).to.equal('You must provide a valid document!')
+        })
+
+        it('handles update error correctly - bad doc - no title', function () {
+            const context = { userId: userId };
+            let msg = '';
+            const newId = Random.id()
+            let resultId = ''
+            const fakeProject = TestData.fakeProject()
+            fakeProject.title = null
+            fakeProject._id = Random.id()
+            sandbox.stub(Projects, 'findOne').returns(fakeProject)
+            sandbox.stub(Projects, 'update').throws(TestData.fakeError())
+            sandbox.stub(Logger, 'log')
+
+            try {
+                resultId = subject.apply(context, [fakeProject]);
+            } catch (error) {
+                msg = error.reason;
+            }
+
+            expect(msg).to.equal('You must provide a valid document!')
+        })
+
+        it('handles update error correctly', function () {
+            const context = { userId: userId };
+            let msg = '';
+            const newId = Random.id()
+            let resultId = ''
+            const fakeProject = TestData.fakeProject()
+            fakeProject._id = Random.id()
+            sandbox.stub(Projects, 'findOne').returns(fakeProject)
+            sandbox.stub(Projects, 'update').throws(TestData.fakeError())
+            sandbox.stub(Logger, 'log')
+
+            try {
+                resultId = subject.apply(context, [fakeProject]);
+            } catch (error) {
+                msg = error.reason;
+            }
+
             expect(Logger.log).to.have.been.called
-            expect(msg).to.equal('Project not updated - please try again later')
+            expect(msg).to.equal('Project not updated - please try again later!')
         })
     })
 }

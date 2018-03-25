@@ -41,13 +41,15 @@ Template.kwoteListItem.events({
         toastr.success('Quote body text copied to clip board!')
     },
     'click #btnDelete': function (event, instance) {
-        const msg = `Are you sure you want to delete quote <b>${this.title}</b>?`
+        const self = this
+        const msg = `Are you sure you want to delete quote <b>${self.title}</b>?`
         const title = 'Delete Quote?'
         ConfirmDialog.showConfirmation(msg, title, 'danger', null, function () {
-            Meteor.call('deleteQuote', this._id, function (err, response) {
+            Meteor.call('deleteKwote', self._id, function (err, response) {
                 if (err) {
                     toastr.error(err.reason)
                 } else {
+                    toastr.info('Kwote removed successfully!')
                     FlowRouter.go('/kwotes')
                 }
             })

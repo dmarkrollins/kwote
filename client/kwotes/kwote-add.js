@@ -20,7 +20,7 @@ Template.kwoteAdd.onCreated(function () {
             if (err) {
                 toastr.error(err.reason)
             } else {
-                toastr.info('Kwote created successfully')
+                toastr.success('Kwote added successfully')
                 FlowRouter.go('/kwotes')
             }
         })

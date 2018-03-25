@@ -14,10 +14,9 @@ It's mobile friendly so take Kwote with you wherever you go to capture new items
 
 ## Outstanding Items [WIP]
 
+- Add categories and projects
 - Links from Authors, Projects Categories nav to and filter Kwotes list
 - All Delete functionality
-- Kwote, Project, Category edit
-- Publication tests
 
 ## Credits
 

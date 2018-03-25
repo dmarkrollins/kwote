@@ -13,6 +13,7 @@ Template.authorEdit.onCreated(function () {
             if (err) {
                 toastr.error(err.reason)
             } else {
+                toastr.success('Author updated successfully!')
                 FlowRouter.go('/authors')
             }
         })
@@ -37,5 +38,8 @@ Template.authorEdit.helpers({
         return function () {
             FlowRouter.go('/authors')
         }
+    },
+    isReady() {
+        return FlowRouter.subsReady()
     }
 })
