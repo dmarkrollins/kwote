@@ -39,11 +39,7 @@ Template.kwoteListItem.helpers({
 
 Template.kwoteListItem.events({
     'click #btnCopy': function (event, instance) {
-        var $temp = $('<input>')
-        $('body').append($temp)
-        $temp.val(this.body).select()
-        document.execCommand('copy')  // eslint-disable-line
-        $temp.remove()
+        Clipboard.copy(this.body) // eslint-disable-line
         toastr.success('Quote body text copied to clip board!')
     },
     'click #btnDelete': function (event, instance) {

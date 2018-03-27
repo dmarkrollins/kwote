@@ -15,6 +15,9 @@
                                     <tr>
                                         <td colspan="2">
                                             <input id="editValue" type='text' class="form-control" value="{{title}}">
+                                            <span class="pull-left" style="margin-top: 7px; color: #990000;">
+                                                {{itemErr}}
+                                            </span>
                                             <span class="pull-right" style="margin-top: 7px;">
                                                 <a href="#" id="btnSave" style="margin-left: 12px;">Save</a><a href="#" id="btnCancel" style="margin-left: 7px;">Cancel</a>
                                             </span>
@@ -41,7 +44,7 @@
         </div>
     {{else}}
         <div class="row">
-            <div class="col-xs-12 centerForm vertical-center helpText" style="max-width: 600px; font-weight: bold; color: #dcdcdc;">
+            <div class="col-xs-12 vertical-center helpText" style="max-width: 100%; font-weight: bold; color: #dcdcdc;">
                 No Projects found!
             </div>
         </div>

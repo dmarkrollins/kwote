@@ -1,5 +1,5 @@
 <template name="categories">
-    <div class="container">
+    <div class="container" style="min-height: 100vh;">
 
         {{> legend}}
 
@@ -18,9 +18,12 @@
         </div>
 
         {{#if showNewItem}}
-            <div class="row">
+            <div class="row" style="margin-bottom: 7px;">
                 <div class="col-xs-12 col-sm-6 col-sm-offset-3">
                     <input id="newCategoryField" type='text' class="form-control" placeholder="Enter new category">
+                    <span class="pull-left" style="margin-top: 7px; color: #990000;">
+                        {{itemErr}}
+                    </span>
                     <span class="pull-right" style="margin-top: 7px;">
                         <a href="#" id="btnAdd" style="margin-left: 12px;">Save</a><a href="#" id="btnCancelAdd" style="margin-left: 7px;">Cancel</a>
                     </span>

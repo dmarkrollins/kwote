@@ -28,10 +28,8 @@ class KwoteItem extends Component {
         this.isOptionUnique = this.isOptionUnique.bind(this)
         this.projectChanged = this.projectChanged.bind(this)
         this.authorChanged = this.authorChanged.bind(this)
-        this.manageAuthors = this.manageAuthors.bind(this)
+        // this.manageAuthors = this.manageAuthors.bind(this)
         this.editorChanged = this.editorChanged.bind(this)
-        // console.log(this.props.projects)
-        // console.log(this.props.categories)
     }
 
     formIsValid() {
@@ -121,11 +119,6 @@ class KwoteItem extends Component {
         this.setState({ kwote })
     }
 
-    manageAuthors() {
-        // collect values into session object
-        // navigate to new author
-    }
-
     editorButtons() {
         return [
             ['formatting'],
@@ -210,7 +203,7 @@ class KwoteItem extends Component {
                         <label>Kwote Body *</label><br />
                         <Trumbowyg
                             id="kwoteBody"
-                            data={this.state.kwote.body}
+                            data={this.props.kwote.body}
                             placeholder="Paste or enter Kwote here"
                             autogrow={false}
                             imageWidthModalEdit={true}
@@ -226,7 +219,15 @@ class KwoteItem extends Component {
                         * required item
                     </div>
 
-                    <div style={{ width: '100%', color: '#990000', textAlign: 'center' }}>
+                    <div style={
+                        {
+                            width: '100%',
+                            color: '#990000',
+                            textAlign: 'center',
+                            marginBottom: '12px',
+                            marginTop: '7px'
+                        }
+                    }>
                         {this.state.errorMessage}
                     </div>
 

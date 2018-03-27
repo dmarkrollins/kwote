@@ -69,6 +69,48 @@ const TestData = {
         return doc
     },
 
+    fakeCategoriesArray(parameters) {
+        let parms = {}
+
+        if (!_.isUndefined(parameters)) {
+            parms = parameters
+        }
+
+        const doc = []
+
+        const count = parms.count || 4
+
+        for (let i = 0; i < count; i += 1) {
+            doc.push({
+                label: `Category_${i}`,
+                value: 'placeholder'
+            })
+        }
+
+        return doc
+    },
+
+    fakeProjectsArray(parameters) {
+        let parms = {}
+
+        if (!_.isUndefined(parameters)) {
+            parms = parameters
+        }
+
+        const doc = []
+
+        const count = parms.count || 4
+
+        for (let i = 0; i < count; i += 1) {
+            doc.push({
+                label: `Project_${i}`,
+                value: 'placeholder'
+            })
+        }
+
+        return doc
+    },
+
     fakeProject(parameters) {
         let parms = {}
 

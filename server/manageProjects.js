@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor'
 import { _ } from 'meteor/underscore'
 import { Projects } from '../lib/kwote'
 
@@ -6,7 +7,9 @@ const ManageProjects = (kwoteProjects) => {
 
     if (_.isArray(kwoteProjects) && kwoteProjects[0]) {
         kwoteProjects.forEach((item) => {
-            if (item.value !== 'placeholder') {
+            if (!_.isObject(item)) {
+                projectArray.push(item)
+            } else if (item.value !== 'placeholder') {
                 projectArray.push(item.value)
             } else {
                 const c = Projects.findOne({ title: item.label })
@@ -24,7 +27,7 @@ const ManageProjects = (kwoteProjects) => {
                                 isUpdate: false,
                                 isUpsert: false,
                                 isFromTrustedCode: true,
-                                userId: this.userId
+                                userId: Meteor.userId()
                             }
                         }
                     )

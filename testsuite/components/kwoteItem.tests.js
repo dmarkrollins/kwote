@@ -129,14 +129,12 @@ if (Meteor.isClient) {
                 handleCancel={isCancelled}
             />)
 
-
             wrapper.find('button.btn-success').simulate('click')
 
             expect(
                 isSaved,
                 'save event handler NOT called when save is clicked'
             ).to.not.have.been.called
-
 
             expect(wrapper.find('input#kwoteTitle.form-error'), 'title input').to.have.length(1)
             // expect(div.find('#kwoteBody.form-error'), 'rich text edit').to.have.length(1)

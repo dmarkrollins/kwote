@@ -7,6 +7,13 @@ Template.termsOfUse.onCreated(function () {
     this.working = new ReactiveVar(false)
 })
 
+Template.termsOfUse.events({
+    'click #btnBack': function (event, instance) {
+        event.preventDefault()
+        history.go(-1) // eslint-disable-line
+    }
+})
+
 Template.termsOfUse.onRendered(function () {
     const instance = Template.instance()
 

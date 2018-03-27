@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor'
 import { _ } from 'meteor/underscore'
 import { Categories } from '../lib/kwote'
 
@@ -6,7 +7,9 @@ const ManageCategories = (kwoteCategories) => {
 
     if (_.isArray(kwoteCategories) && kwoteCategories[0]) {
         kwoteCategories.forEach((item) => {
-            if (item.value !== 'placeholder') {
+            if (!_.isObject(item)) {
+                categoryArray.push(item)
+            } else if (item.value !== 'placeholder') {
                 categoryArray.push(item.value)
             } else {
                 const c = Categories.findOne({ title: item.label })
@@ -24,7 +27,7 @@ const ManageCategories = (kwoteCategories) => {
                                 isUpdate: false,
                                 isUpsert: false,
                                 isFromTrustedCode: true,
-                                userId: this.userId
+                                userId: Meteor.userId()
                             }
                         }
                     )

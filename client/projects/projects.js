@@ -12,6 +12,7 @@ import { Kwote, Authors } from '../../lib/kwote'
 Template.projects.onCreated(function () {
     const self = this
 
+    self.itemErr = new ReactiveVar('')
     self.showNewItem = new ReactiveVar(false)
 })
 
@@ -21,6 +22,9 @@ Template.projects.helpers({
     },
     showNewItem() {
         return Template.instance().showNewItem.get()
+    },
+    itemErr() {
+        return Template.instance().itemErr.get()
     }
 })
 
@@ -30,12 +34,18 @@ Template.projects.events({
     },
     'click #btnNewProject': function (event, instance) {
         instance.showNewItem.set(true)
+        instance.itemErr.set('')
     },
     'click #btnCancelAdd': function (event, instance) {
         instance.showNewItem.set(false)
     },
     'click #btnAdd': function (event, instance) {
         const newValue = $('#newProjectField').val()
+
+        if (newValue === '') {
+            instance.itemErr.set('Project text is required!')
+            return
+        }
 
         Meteor.call('createProject', newValue, function (err, response) {
             if (err) {

@@ -48,17 +48,29 @@ if (Meteor.isClient) {
             sandbox.restore()
         })
 
-        it('displays correctly', function () {
-            // sandbox.stub(Meteor, 'user').returns(fakeUser)
-
+        it('displays correctly authenticated', function () {
+            sandbox.stub(Meteor, 'userId').returns('fake-id')
             withRenderedTemplate('topMenu', null, (el) => {
-                expect($(el).find('a#menuProjects'), 'view archives').to.have.length(1)
-                expect($(el).find('a#menuCategories'), 'preferences').to.have.length(1)
-                expect($(el).find('a#btnKwotes'), 'share sequent').to.have.length(1)
+                expect($(el).find('a#menuProjects'), 'projects option').to.have.length(1)
+                expect($(el).find('a#menuCategories'), 'categories option').to.have.length(1)
+                expect($(el).find('a#btnKwotes'), 'kwotes button').to.have.length(1)
                 expect($(el).find('a#btnAuthors'), 'authors btn').to.have.length(1)
-                expect($(el).find('a#versionInfo'), 'version info').to.have.length(1)
+                expect($(el).find('i.fa-thumb-tack'), 'version info').to.have.length(1)
                 expect($(el).find('a#signOut'), 'signout').to.have.length(1)
                 expect($(el).find('a#shareKwote'), 'share').to.have.length(1)
+            });
+        })
+
+        it('displays correctly un-authenticated', function () {
+            sandbox.stub(Meteor, 'userId').returns(null)
+            withRenderedTemplate('topMenu', null, (el) => {
+                expect($(el).find('a#menuProjects'), 'projects option').to.have.length(0)
+                expect($(el).find('a#menuCategories'), 'categories option').to.have.length(0)
+                expect($(el).find('a#btnKwotes'), 'kwotes button').to.have.length(0)
+                expect($(el).find('a#btnAuthors'), 'authors btn').to.have.length(0)
+                expect($(el).find('i.fa-thumb-tack'), 'version info').to.have.length(0)
+                expect($(el).find('a#signOut'), 'signout').to.have.length(0)
+                expect($(el).find('a#shareKwote'), 'share').to.have.length(0)
             });
         })
     })

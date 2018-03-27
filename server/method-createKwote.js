@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor'
 import { _ } from 'meteor/underscore'
-import { Quotes, Projects, Categories } from './kwote'
-import { Logger } from './logger'
-import { ManageProjects } from '../lib/manageProjects'
-import { ManageCategories } from '../lib/manageCategories'
+import { Quotes, Projects, Categories } from '../lib/kwote'
+import { Logger } from '../lib/logger'
+import { ManageProjects } from './manageProjects'
+import { ManageCategories } from './manageCategories'
 
 Meteor.methods({
     createKwote(kwote) {

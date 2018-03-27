@@ -189,7 +189,15 @@ class AuthorItem extends Component {
                         * required item
                     </div>
 
-                    <div style={{ width: '100%', color: '#990000', textAlign: 'center' }}>
+                    <div style={
+                        {
+                            width: '100%',
+                            color: '#990000',
+                            textAlign: 'center',
+                            marginBottom: '12px',
+                            marginTop: '7px'
+                        }
+                    }>
                         {this.state.errorMessage}
                     </div>
 

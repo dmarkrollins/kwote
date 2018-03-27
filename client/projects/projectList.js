@@ -13,6 +13,7 @@ Template.projectList.onCreated(function () {
 
     self.editId = new ReactiveVar('')
     self.loaded = new ReactiveVar(0)
+    self.itemErr = new ReactiveVar('')
     self.getSearch = () => Session.get(Kwote.ProjectSearchKey) || ''
 
     self.autorun(function () {
@@ -34,6 +35,9 @@ Template.projectList.helpers({
     },
     editMode() {
         return this._id === Template.instance().editId.get()
+    },
+    itemErr() {
+        return Template.instance().itemErr.get()
     }
 })
 
@@ -54,12 +58,19 @@ Template.projectList.events({
     },
     'click #btnEdit': function (event, instance) {
         instance.editId.set(this._id)
+        instance.itemErr.set('')
     },
     'click #btnSave': function (event, instance) {
         const value = $('#editValue').val()
         const doc = {}
         doc._id = this._id
         doc.title = value
+
+        if (value === '') {
+            instance.itemErr.set('Project text is required!')
+            return
+        }
+
         Meteor.call('updateProject', doc, function (err, result) {
             if (err) {
                 toastr.error(err.reason)

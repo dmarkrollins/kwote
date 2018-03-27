@@ -3,6 +3,8 @@ import { FlowRouter } from 'meteor/kadira:flow-router'
 import { BlazeLayout } from 'meteor/kadira:blaze-layout'
 import { Kwote } from '../lib/kwote'
 
+BlazeLayout.setRoot('#flow-container');
+
 FlowRouter.route('/', {
     action: function () {
         if (Meteor.userId()) {

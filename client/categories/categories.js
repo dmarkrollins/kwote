@@ -11,7 +11,7 @@ import { Kwote, Authors } from '../../lib/kwote'
 
 Template.categories.onCreated(function () {
     const self = this
-
+    self.itemErr = new ReactiveVar('')
     self.showNewItem = new ReactiveVar(false)
 })
 
@@ -21,7 +21,11 @@ Template.categories.helpers({
     },
     showNewItem() {
         return Template.instance().showNewItem.get()
+    },
+    itemErr() {
+        return Template.instance().itemErr.get()
     }
+
 })
 
 Template.categories.events({
@@ -30,12 +34,18 @@ Template.categories.events({
     },
     'click #btnNewCategory': function (event, instance) {
         instance.showNewItem.set(true)
+        instance.itemErr.set('')
     },
     'input #searchBox': _.debounce(function (event, instance) {
         Session.set(Kwote.CategorySearchKey, event.target.value)
     }, 500),
     'click #btnAdd': function (event, instance) {
         const newCategory = $('#newCategoryField').val()
+
+        if (newCategory === '') {
+            instance.itemErr.set('Category text is required!')
+            return
+        }
 
         Meteor.call('createCategory', newCategory, function (err, response) {
             if (err) {
