@@ -30,11 +30,29 @@ Template.kwotesList.onCreated(function () {
             self.loaded.set(Quotes.find().count())
         }
     })
+
+    self.scrollToOffset = (value) => {
+        $('html, body').animate(
+            {
+                scrollTop: value
+            },
+            750,
+            'swing'
+        );
+    }
+})
+
+Template.kwotesList.onRendered(function () {
+    const scrollVal = Session.get(Kwote.ListScrollValue) || 0
+    if (scrollVal > 0) {
+        Template.instance().scrollToOffset(scrollVal)
+        Session.set(Kwote.ListScrollValue, 0)
+    }
 })
 
 Template.kwotesList.helpers({
     hasQuotes() {
-        return Quotes.find({}, { sort: { title: 1 } }).count() > 0
+        return Quotes.find({}).count() > 0
     },
     hasMoreQuotes() {
         const instance = Template.instance()
@@ -42,7 +60,7 @@ Template.kwotesList.helpers({
         return instance.loaded.get() === search.limit
     },
     kwote() {
-        return Quotes.find({})
+        return Quotes.find({}, { sort: { title: 1 } })
     },
     truncedBody() {
         return Spacebars.SafeString(this.body.substring(0, 256))
@@ -72,13 +90,6 @@ Template.kwotesList.events({
         const search = instance.getSearch()
         search.limit += Kwote.defaultLimit
         Session.set(Kwote.KwoteSearchKey, search)
-
-        $('html, body').animate(
-            {
-                scrollTop: $('#btnMore').offset().top // $(document).height()-$(window).height()},
-            },
-            750,
-            'swing'
-        );
+        instance.scrollToOffset($('#btnMore').offset().top)
     }
 })

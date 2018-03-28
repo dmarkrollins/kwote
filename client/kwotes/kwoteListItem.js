@@ -2,11 +2,12 @@ import { Template } from 'meteor/templating'
 import { Meteor } from 'meteor/meteor'
 import { Spacebars } from 'meteor/spacebars'
 import { FlowRouter } from 'meteor/kadira:flow-router'
+import { Session } from 'meteor/session'
 import { $ } from 'meteor/jquery'
 import moment from 'moment'
 import toastr from 'toastr'
 
-import { Authors } from '../../lib/kwote'
+import { Kwote, Authors } from '../../lib/kwote'
 import { ConfirmDialog } from '../common/confirmDialog'
 
 Template.kwoteListItem.helpers({
@@ -34,6 +35,9 @@ Template.kwoteListItem.helpers({
             return Spacebars.SafeString(`${author.firstName} ${author.lastName} <span style="margin-left: 7px;">${birthYear}-${deathYear}</span>`)
         }
         return ''
+    },
+    itemId() {
+        return this._id
     }
 })
 
@@ -58,6 +62,9 @@ Template.kwoteListItem.events({
         }, 'danger')
     },
     'click #btnEdit': function (event, instance) {
+        const elemID = `div#${this._id}`
+        const scrollValue = $(elemID).offset().top - 21
+        Session.set(Kwote.ListScrollValue, scrollValue)
         FlowRouter.go(`/kwotes/edit/${this._id}`)
     }
 })

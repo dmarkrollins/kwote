@@ -26,9 +26,6 @@ Template.kwoteEdit.onCreated(function () {
             }
         })
     }
-    self.autorun(function () {
-        console.log('subs are ready', FlowRouter.subsReady())
-    })
 })
 
 Template.kwoteEdit.helpers({
@@ -95,10 +92,6 @@ Template.kwoteEdit.helpers({
         return retval
     },
     isReady() {
-        console.log('kwotes', FlowRouter.subsReady('singlequote'))
-        console.log('projects', FlowRouter.subsReady('projects'))
-        console.log('authors', FlowRouter.subsReady('authors'))
-        console.log('categories', FlowRouter.subsReady('categories'))
         return FlowRouter.subsReady()
     }
 
