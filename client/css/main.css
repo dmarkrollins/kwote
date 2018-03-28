@@ -348,9 +348,3 @@ div.multi-selector2 span.Select-value {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
-
-.toast-top-full-width {
-    top: 64px !important;
-    right: 0;
-    width: 100%;
-}

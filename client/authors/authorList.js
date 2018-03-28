@@ -63,7 +63,6 @@ Template.authorList.events({
             Meteor.call('deleteAuthor', this._id, function (err) {
                 if (err) {
                     toastr.error(err.reason)
-                    return
                 }
                 toastr.info('Author removed successfully!')
             })

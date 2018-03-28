@@ -14,7 +14,7 @@ Template.authorAdd.onCreated(function () {
                 if (err) {
                     toastr.error(err.reason)
                 } else {
-                    toastr.success('Author added successfully!')
+                    // toastr.success('Author added successfully!')
                     FlowRouter.go('/authors')
                 }
             })

@@ -52,7 +52,7 @@ Template.categories.events({
                 toastr.error(err.reason)
                 return
             }
-            toastr.success('Category added successfully!')
+            // toastr.success('Category added successfully!')
             instance.showNewItem.set(false)
         })
     },

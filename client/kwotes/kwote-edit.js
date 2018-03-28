@@ -21,7 +21,7 @@ Template.kwoteEdit.onCreated(function () {
             if (err) {
                 toastr.error(err.reason)
             } else {
-                toastr.success('Kwote updated successfully')
+                // toastr.success('Kwote updated successfully')
                 FlowRouter.go('/kwotes')
             }
         })

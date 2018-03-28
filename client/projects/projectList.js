@@ -76,7 +76,7 @@ Template.projectList.events({
                 toastr.error(err.reason)
                 return
             }
-            toastr.success('Project updated successfully!')
+            // toastr.success('Project updated successfully!')
             instance.editId.set('')
         })
     },

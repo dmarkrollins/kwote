@@ -13,7 +13,7 @@ Template.authorEdit.onCreated(function () {
             if (err) {
                 toastr.error(err.reason)
             } else {
-                toastr.success('Author updated successfully!')
+                // toastr.success('Author updated successfully!')
                 FlowRouter.go('/authors')
             }
         })

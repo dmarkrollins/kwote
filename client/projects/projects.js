@@ -52,7 +52,7 @@ Template.projects.events({
                 toastr.error(err.reason)
                 return
             }
-            toastr.success('Project added successfully!')
+            // toastr.success('Project added successfully!')
             instance.showNewItem.set(false)
         })
     },

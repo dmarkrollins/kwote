@@ -34,7 +34,7 @@ Template.kwotesList.onCreated(function () {
 
 Template.kwotesList.helpers({
     hasQuotes() {
-        return Quotes.find({}).count() > 0
+        return Quotes.find({}, { sort: { title: 1 } }).count() > 0
     },
     hasMoreQuotes() {
         const instance = Template.instance()
