@@ -10,6 +10,10 @@ It's mobile friendly so take Kwote with you wherever you go to capture new items
 - Search by author, project, category, title, or body of quote
 - Copy items from Kwote and paste directly into your writing project.
 
+## Check It Out
+
+https://kwotes.herokuapp.com/
+
 ## Credits
 
 - react-select - [https://github.com/JedWatson/react-select](https://github.com/JedWatson/react-select)
