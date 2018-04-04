@@ -5,6 +5,9 @@ import { Kwote, Quotes, Projects, Categories, Authors } from '../lib/kwote'
 
 Quotes._ensureIndex('createdBy', 1)
 Quotes._ensureIndex('title', 1)
+Quotes._ensureIndex('author', 1)
+Quotes._ensureIndex('projects', 1)
+Quotes._ensureIndex('categories', 1)
 
 Meteor.publish('myQuotes', function (search) {
     if (!Meteor.userId()) {

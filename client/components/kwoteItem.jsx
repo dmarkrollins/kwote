@@ -200,7 +200,7 @@ class KwoteItem extends Component {
                     </div>
 
                     <div className="form-group">
-                        <label>Kwote Body *</label><br />
+                        <label>Kwote Body *</label>
                         <Trumbowyg
                             id="kwoteBody"
                             data={this.props.kwote.body}

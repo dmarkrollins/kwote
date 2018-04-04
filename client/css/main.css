@@ -1,3 +1,8 @@
+html, body {
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+}
+
 .header {
     display: table;
     position: relative;
@@ -231,6 +236,7 @@ div.multi-selector2 span.Select-value {
 .trumbowyg-box {
     border-radius: 4px !important;
     min-height: 165px !important;
+    margin: 0 !important;
 }
 
 .trumbowyg-editor {

@@ -16,8 +16,6 @@ chai.use(chaiEnzyme())
 chai.use(sinonChai)
 
 if (Meteor.isClient) {
-    const isCancelled = null
-
     import '../../client/components/registerAll'
 
     describe('Author Item Component', function () {
