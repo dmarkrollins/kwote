@@ -10,7 +10,21 @@ It's mobile friendly so take Kwote with you wherever you go to capture new items
 - Search by author, project, category, title, or body of quote
 - Copy items from Kwote and paste directly into your writing project.
 
-## Check It Out
+## Application Snapshots
+
+### Landing Page
+
+<img src="/private/kwoteLanding.jpg" width="300" />
+
+### Kwote List
+
+<img src="/private/kwoteList.jpg" width="300" />
+
+### Kwote List
+
+<img src="/private/kwoteNew.jpg" width="300" />
+
+## Live Demo
 
 https://kwotes.herokuapp.com/
 
