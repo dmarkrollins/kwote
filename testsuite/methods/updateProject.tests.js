@@ -48,10 +48,10 @@ if (Meteor.isServer) {
             expect(msg, 'should throw not logged in').to.be.equal('You must be authenticated to perform this action! [not-logged-in]');
         })
 
-        it('checks for not found', function () {
+        it('checks for not found', async function () {
             const context = { userId: userId };
             let msg = '';
-            const fakeProject = TestData.fakeProject()
+            const fakeProject = await TestData.fakeProject()
             fakeProject._id = Random.id()
             sandbox.stub(Projects, 'findOne').returns(null)
 
@@ -64,10 +64,10 @@ if (Meteor.isServer) {
             expect(msg, 'should throw not found error').to.be.equal('Project not found! [not-found]');
         })
 
-        it('checks for duplicate Project', function () {
+        it('checks for duplicate Project', async function () {
             const context = { userId: userId };
             let msg = '';
-            const fakeProject = TestData.fakeProject()
+            const fakeProject = await TestData.fakeProject()
             fakeProject._id = Random.id()
             fakeProject.createdBy = userId
 
@@ -86,12 +86,12 @@ if (Meteor.isServer) {
             expect(msg, 'should check for dups').to.be.equal('This Project already exists! [duplicate-found]');
         })
 
-        it('upates Project correctly - stubbed', function () {
+        it('upates Project correctly - stubbed', async function () {
             const context = { userId: userId };
             let msg = '';
             const aId = Random.id()
             let resultId = ''
-            const fakeProject = TestData.fakeProject()
+            const fakeProject = await TestData.fakeProject()
             fakeProject._id = aId
             sandbox.stub(Projects, 'findOne').returns(fakeProject)
             sandbox.stub(Projects, 'update')
@@ -108,12 +108,12 @@ if (Meteor.isServer) {
             expect(params.$set.title).to.equal(fakeProject.title)
         })
 
-        it('handles update error correctly - bad doc - no id', function () {
+        it('handles update error correctly - bad doc - no id', async function () {
             const context = { userId: userId };
             let msg = '';
             const newId = Random.id()
             let resultId = ''
-            const fakeProject = TestData.fakeProject()
+            const fakeProject = await TestData.fakeProject()
             sandbox.stub(Projects, 'findOne').returns(fakeProject)
             sandbox.stub(Projects, 'update').throws(TestData.fakeError())
             sandbox.stub(Logger, 'log')
@@ -127,12 +127,12 @@ if (Meteor.isServer) {
             expect(msg).to.equal('You must provide a valid document!')
         })
 
-        it('handles update error correctly - bad doc - no title', function () {
+        it('handles update error correctly - bad doc - no title', async function () {
             const context = { userId: userId };
             let msg = '';
             const newId = Random.id()
             let resultId = ''
-            const fakeProject = TestData.fakeProject()
+            const fakeProject = await TestData.fakeProject()
             fakeProject.title = null
             fakeProject._id = Random.id()
             sandbox.stub(Projects, 'findOne').returns(fakeProject)
@@ -148,12 +148,12 @@ if (Meteor.isServer) {
             expect(msg).to.equal('You must provide a valid document!')
         })
 
-        it('handles update error correctly', function () {
+        it('handles update error correctly', async function () {
             const context = { userId: userId };
             let msg = '';
             const newId = Random.id()
             let resultId = ''
-            const fakeProject = TestData.fakeProject()
+            const fakeProject = await TestData.fakeProject()
             fakeProject._id = Random.id()
             sandbox.stub(Projects, 'findOne').returns(fakeProject)
             sandbox.stub(Projects, 'update').throws(TestData.fakeError())

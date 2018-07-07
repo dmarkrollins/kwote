@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor'
 import { _ } from 'meteor/underscore'
-import { Quotes, Projects, Categories } from './kwote'
-import { Logger } from './logger'
-import { ManageProjects } from './manageProjects'
-import { ManageCategories } from './manageCategories'
+import { Quotes, Projects, Categories } from '../lib/kwote'
+import { Logger } from '../lib/logger'
+import { ManageProjects } from '../lib/manageProjects'
+import { ManageCategories } from '../lib/manageCategories'
 
 Meteor.methods({
     updateKwote(kwote) {
@@ -17,8 +17,8 @@ Meteor.methods({
             throw new Meteor.Error('not-found', 'Kwote does not exist - cannot be updated!')
         }
 
-        const projectArray = ManageProjects(kwote.projects)
-        const categoryArray = ManageCategories(kwote.categories)
+        const projectArray = ManageProjects(kwote.projects, this.userId)
+        const categoryArray = ManageCategories(kwote.categories, this.userId)
         const authorId = kwote.author ? kwote.author.value : null
 
         try {

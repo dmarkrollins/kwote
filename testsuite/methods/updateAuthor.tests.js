@@ -48,10 +48,10 @@ if (Meteor.isServer) {
             expect(msg, 'should throw not logged in').to.be.equal('You must be authenticated to perform this action! [not-logged-in]');
         })
 
-        it('checks for not found', function () {
+        it('checks for not found', async function () {
             const context = { userId: userId };
             let msg = '';
-            const fakeAuthor = TestData.fakeAuthor()
+            const fakeAuthor = await TestData.fakeAuthor()
             fakeAuthor._id = Random.id()
             sandbox.stub(Authors, 'findOne').returns(null)
 
@@ -64,10 +64,10 @@ if (Meteor.isServer) {
             expect(msg, 'should throw not found error').to.be.equal('Author not found! [not-found]');
         })
 
-        it('checks for duplicate author', function () {
+        it('checks for duplicate author', async function () {
             const context = { userId: userId };
             let msg = '';
-            const fakeAuthor = TestData.fakeAuthor()
+            const fakeAuthor = await TestData.fakeAuthor()
             fakeAuthor._id = Random.id()
             fakeAuthor.createdBy = userId
 
@@ -86,12 +86,12 @@ if (Meteor.isServer) {
             expect(msg, 'should check for dups').to.be.equal('This author already exists in your authors collection! [duplicate-found]');
         })
 
-        it('upates author correctly - stubbed', function () {
+        it('upates author correctly - stubbed', async function () {
             const context = { userId: userId };
             let msg = '';
             const aId = Random.id()
             let resultId = ''
-            const fakeAuthor = TestData.fakeAuthor()
+            const fakeAuthor = await TestData.fakeAuthor()
             fakeAuthor._id = aId
             sandbox.stub(Authors, 'findOne').returns(fakeAuthor)
             sandbox.stub(Authors, 'update')
@@ -113,12 +113,12 @@ if (Meteor.isServer) {
             expect(params.$set.createdBy).to.equal(fakeAuthor.createdBy)
         })
 
-        it('handles update error correctly', function () {
+        it('handles update error correctly', async function () {
             const context = { userId: userId };
             let msg = '';
             const newId = Random.id()
             let resultId = ''
-            const fakeAuthor = TestData.fakeAuthor()
+            const fakeAuthor = await TestData.fakeAuthor()
             sandbox.stub(Authors, 'findOne').returns(fakeAuthor)
             sandbox.stub(Authors, 'update').throws(TestData.fakeError())
             sandbox.stub(Logger, 'log')

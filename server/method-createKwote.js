@@ -2,8 +2,8 @@ import { Meteor } from 'meteor/meteor'
 import { _ } from 'meteor/underscore'
 import { Quotes, Projects, Categories } from '../lib/kwote'
 import { Logger } from '../lib/logger'
-import { ManageProjects } from './manageProjects'
-import { ManageCategories } from './manageCategories'
+import { ManageProjects } from '../lib/manageProjects'
+import { ManageCategories } from '../lib/manageCategories'
 
 Meteor.methods({
     createKwote(kwote) {
@@ -19,8 +19,8 @@ Meteor.methods({
             throw new Meteor.Error('duplicate-found', 'You\'ve already created a Kwote with this title!')
         }
 
-        const projectArray = ManageProjects(kwote.projects)
-        const categoryArray = ManageCategories(kwote.categories)
+        const projectArray = ManageProjects(kwote.projects, this.userId)
+        const categoryArray = ManageCategories(kwote.categories, this.userId)
         const authorId = kwote.author ? kwote.author.value : null
 
         const newQuote = {

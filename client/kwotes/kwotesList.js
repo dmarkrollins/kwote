@@ -82,6 +82,13 @@ Template.kwotesList.helpers({
     lastModified() {
         const dte = this.modifiedAt || this.createdAt
         return moment(dte).format('MM/DD/YYYY')
+    },
+    notFound() {
+        const search = Session.get(Kwote.KwoteSearchKey) || { limit: 10, title: '' }
+        if (search.title !== '') {
+            return 'Search found no Kwotes!'
+        }
+        return 'No Kwotes found!'
     }
 })
 

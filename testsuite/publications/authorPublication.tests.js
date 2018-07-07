@@ -28,10 +28,10 @@ if (Meteor.isServer) {
             Authors.remove({})
         });
 
-        it('authors published - no search', function (done) {
+        it('authors published - no search', async function (done) {
             sandbox.stub(Meteor, 'userId').returns(Random.id())
 
-            Authors.insert(TestData.fakeAuthor())
+            Authors.insert(await TestData.fakeAuthor())
 
             const collector = new PublicationCollector()
 
@@ -43,13 +43,13 @@ if (Meteor.isServer) {
             });
         })
 
-        it('authors published - search', function (done) {
+        it('authors published - search', async function (done) {
             sandbox.stub(Meteor, 'userId').returns(Random.id())
 
-            Authors.insert(TestData.fakeAuthor({ lastName: 'White' }))
-            Authors.insert(TestData.fakeAuthor({ lastName: 'Whitely' }))
-            Authors.insert(TestData.fakeAuthor({ lastName: 'Red' }))
-            Authors.insert(TestData.fakeAuthor({ lastName: 'Blue' }))
+            Authors.insert(await TestData.fakeAuthor({ lastName: 'White' }))
+            Authors.insert(await TestData.fakeAuthor({ lastName: 'Whitely' }))
+            Authors.insert(await TestData.fakeAuthor({ lastName: 'Red' }))
+            Authors.insert(await TestData.fakeAuthor({ lastName: 'Blue' }))
 
             const collector = new PublicationCollector()
 

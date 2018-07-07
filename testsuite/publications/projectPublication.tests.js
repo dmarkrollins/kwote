@@ -28,10 +28,10 @@ if (Meteor.isServer) {
             Projects.remove({})
         });
 
-        it('Projects published - no search', function () {
+        it('Projects published - no search', async function () {
             sandbox.stub(Meteor, 'userId').returns(Random.id())
 
-            Projects.insert(TestData.fakeCategory())
+            Projects.insert(await TestData.fakeCategory())
 
             const collector = new PublicationCollector()
 
@@ -42,17 +42,17 @@ if (Meteor.isServer) {
             });
         })
 
-        it('Projects published - search', function () {
+        it('Projects published - search', async function () {
             sandbox.stub(Meteor, 'userId').returns(Random.id())
 
-            Projects.insert(TestData.fakeCategory({ title: 'white' }))
-            Projects.insert(TestData.fakeCategory({ title: 'white1' }))
-            Projects.insert(TestData.fakeCategory({ title: 'white2' }))
-            Projects.insert(TestData.fakeCategory({ title: 'white3' }))
-            Projects.insert(TestData.fakeCategory({ title: 'white4' }))
-            Projects.insert(TestData.fakeCategory({ title: 'white5' }))
-            Projects.insert(TestData.fakeCategory({ title: 'red' }))
-            Projects.insert(TestData.fakeCategory({ title: 'blue' }))
+            Projects.insert(await TestData.fakeCategory({ title: 'white' }))
+            Projects.insert(await TestData.fakeCategory({ title: 'white1' }))
+            Projects.insert(await TestData.fakeCategory({ title: 'white2' }))
+            Projects.insert(await TestData.fakeCategory({ title: 'white3' }))
+            Projects.insert(await TestData.fakeCategory({ title: 'white4' }))
+            Projects.insert(await TestData.fakeCategory({ title: 'white5' }))
+            Projects.insert(await TestData.fakeCategory({ title: 'red' }))
+            Projects.insert(await TestData.fakeCategory({ title: 'blue' }))
 
             const collector = new PublicationCollector()
 

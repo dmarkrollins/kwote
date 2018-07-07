@@ -28,10 +28,10 @@ if (Meteor.isServer) {
             Quotes.remove({})
         });
 
-        it('Quotes published - no search', function (done) {
+        it('Quotes published - no search', async function (done) {
             sandbox.stub(Meteor, 'userId').returns(Random.id())
 
-            Quotes.insert(TestData.fakeQuote())
+            Quotes.insert(await TestData.fakeQuote())
 
             const collector = new PublicationCollector()
 
@@ -43,15 +43,15 @@ if (Meteor.isServer) {
             });
         })
 
-        it('Quotes published - search by title', function (done) {
+        it('Quotes published - search by title', async function (done) {
             sandbox.stub(Meteor, 'userId').returns(Random.id())
 
             const search = { limit: 10, title: 'white' }
 
-            Quotes.insert(TestData.fakeQuote({ title: 'White' }))
-            Quotes.insert(TestData.fakeQuote({ title: 'Whitely' }))
-            Quotes.insert(TestData.fakeQuote({ title: 'Red' }))
-            Quotes.insert(TestData.fakeQuote({ title: 'Blue' }))
+            Quotes.insert(await TestData.fakeQuote({ title: 'White' }))
+            Quotes.insert(await TestData.fakeQuote({ title: 'Whitely' }))
+            Quotes.insert(await TestData.fakeQuote({ title: 'Red' }))
+            Quotes.insert(await TestData.fakeQuote({ title: 'Blue' }))
 
             const collector = new PublicationCollector()
 
@@ -63,23 +63,23 @@ if (Meteor.isServer) {
             });
         })
 
-        it('Quotes published - limit enforced', function (done) {
+        it('Quotes published - limit enforced', async function (done) {
             sandbox.stub(Meteor, 'userId').returns(Random.id())
 
             const search = { limit: 7, title: 'white' }
 
-            Quotes.insert(TestData.fakeQuote({ title: 'White' }))
-            Quotes.insert(TestData.fakeQuote({ title: 'White' }))
-            Quotes.insert(TestData.fakeQuote({ title: 'White' }))
-            Quotes.insert(TestData.fakeQuote({ title: 'White' }))
-            Quotes.insert(TestData.fakeQuote({ title: 'White' }))
-            Quotes.insert(TestData.fakeQuote({ title: 'White' }))
-            Quotes.insert(TestData.fakeQuote({ title: 'White' }))
-            Quotes.insert(TestData.fakeQuote({ title: 'White' }))
-            Quotes.insert(TestData.fakeQuote({ title: 'Purple' }))
-            Quotes.insert(TestData.fakeQuote({ title: 'Orange' }))
-            Quotes.insert(TestData.fakeQuote({ title: 'Green' }))
-            Quotes.insert(TestData.fakeQuote({ title: 'Blue' }))
+            Quotes.insert(await TestData.fakeQuote({ title: 'White' }))
+            Quotes.insert(await TestData.fakeQuote({ title: 'White' }))
+            Quotes.insert(await TestData.fakeQuote({ title: 'White' }))
+            Quotes.insert(await TestData.fakeQuote({ title: 'White' }))
+            Quotes.insert(await TestData.fakeQuote({ title: 'White' }))
+            Quotes.insert(await TestData.fakeQuote({ title: 'White' }))
+            Quotes.insert(await TestData.fakeQuote({ title: 'White' }))
+            Quotes.insert(await TestData.fakeQuote({ title: 'White' }))
+            Quotes.insert(await TestData.fakeQuote({ title: 'Purple' }))
+            Quotes.insert(await TestData.fakeQuote({ title: 'Orange' }))
+            Quotes.insert(await TestData.fakeQuote({ title: 'Green' }))
+            Quotes.insert(await TestData.fakeQuote({ title: 'Blue' }))
 
             const collector = new PublicationCollector()
 

@@ -17,7 +17,7 @@ const should = chai.should();
 chai.use(sinonChai);
 
 if (Meteor.isServer) {
-    import '../../lib/method-createKwote.js'
+    import '../../server/method-createKwote.js'
 
     describe('Create Kwote Method', function () {
         let userId
@@ -63,12 +63,12 @@ if (Meteor.isServer) {
             expect(msg, 'should throw dup error').to.be.equal('You\'ve already created a Kwote with this title! [duplicate-found]');
         })
 
-        it('inserts new quote correctly - stubbed', function () {
+        it('inserts new quote correctly - stubbed', async function () {
             const context = { userId: userId };
             let msg = '';
             const newId = Random.id()
             let resultId = ''
-            const fakeQuote = TestData.fakeQuote()
+            const fakeQuote = await TestData.fakeQuote()
             sandbox.stub(Quotes, 'findOne').returns(null)
             sandbox.stub(Quotes, 'insert').returns(newId)
 

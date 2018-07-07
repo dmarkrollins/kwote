@@ -48,10 +48,10 @@ if (Meteor.isServer) {
             expect(msg, 'should throw not logged in').to.be.equal('You must be authenticated to perform this action! [not-logged-in]');
         })
 
-        it('checks for not found', function () {
+        it('checks for not found', async function () {
             const context = { userId: userId };
             let msg = '';
-            const fakeCategory = TestData.fakeCategory()
+            const fakeCategory = await TestData.fakeCategory()
             fakeCategory._id = Random.id()
             sandbox.stub(Categories, 'findOne').returns(null)
 
@@ -64,10 +64,10 @@ if (Meteor.isServer) {
             expect(msg, 'should throw not found error').to.be.equal('Category not found! [not-found]');
         })
 
-        it('checks for duplicate Category', function () {
+        it('checks for duplicate Category', async function () {
             const context = { userId: userId };
             let msg = '';
-            const fakeCategory = TestData.fakeCategory()
+            const fakeCategory = await TestData.fakeCategory()
             fakeCategory._id = Random.id()
             fakeCategory.createdBy = userId
 
@@ -86,12 +86,12 @@ if (Meteor.isServer) {
             expect(msg, 'should check for dups').to.be.equal('This Category already exists! [duplicate-found]');
         })
 
-        it('upates Category correctly - stubbed', function () {
+        it('upates Category correctly - stubbed', async function () {
             const context = { userId: userId };
             let msg = '';
             const aId = Random.id()
             let resultId = ''
-            const fakeCategory = TestData.fakeCategory()
+            const fakeCategory = await TestData.fakeCategory()
             fakeCategory._id = aId
             sandbox.stub(Categories, 'findOne').returns(fakeCategory)
             sandbox.stub(Categories, 'update')
@@ -108,12 +108,12 @@ if (Meteor.isServer) {
             expect(params.$set.title).to.equal(fakeCategory.title)
         })
 
-        it('handles update error correctly - bad doc - no id', function () {
+        it('handles update error correctly - bad doc - no id', async function () {
             const context = { userId: userId };
             let msg = '';
             const newId = Random.id()
             let resultId = ''
-            const fakeCategory = TestData.fakeCategory()
+            const fakeCategory = await TestData.fakeCategory()
             sandbox.stub(Categories, 'findOne').returns(fakeCategory)
             sandbox.stub(Categories, 'update').throws(TestData.fakeError())
             sandbox.stub(Logger, 'log')
@@ -127,12 +127,12 @@ if (Meteor.isServer) {
             expect(msg).to.equal('You must provide a valid document!')
         })
 
-        it('handles update error correctly - bad doc - no title', function () {
+        it('handles update error correctly - bad doc - no title', async function () {
             const context = { userId: userId };
             let msg = '';
             const newId = Random.id()
             let resultId = ''
-            const fakeCategory = TestData.fakeCategory()
+            const fakeCategory = await TestData.fakeCategory()
             fakeCategory.title = null
             fakeCategory._id = Random.id()
             sandbox.stub(Categories, 'findOne').returns(fakeCategory)
@@ -148,12 +148,12 @@ if (Meteor.isServer) {
             expect(msg).to.equal('You must provide a valid document!')
         })
 
-        it('handles update error correctly', function () {
+        it('handles update error correctly', async function () {
             const context = { userId: userId };
             let msg = '';
             const newId = Random.id()
             let resultId = ''
-            const fakeCategory = TestData.fakeCategory()
+            const fakeCategory = await TestData.fakeCategory()
             fakeCategory._id = Random.id()
             sandbox.stub(Categories, 'findOne').returns(fakeCategory)
             sandbox.stub(Categories, 'update').throws(TestData.fakeError())

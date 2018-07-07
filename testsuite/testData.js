@@ -1,19 +1,17 @@
 /* global moment */
-
-import { Meteor } from 'meteor/meteor'
 import { Random } from 'meteor/random'
 import { _ } from 'meteor/underscore'
 
-const faker = Meteor.isTest && require('faker') // eslint-disable-line global-require
-
 const TestData = {
 
-    fakeAuthor(parameters) {
+    async fakeAuthor(parameters) {
         let parms = {}
 
         if (!_.isUndefined(parameters)) {
             parms = parameters
         }
+
+        const faker = await import('faker')
 
         const Author = {}
 
@@ -26,7 +24,7 @@ const TestData = {
         return Author
     },
 
-    fakeQuote(parameters) {
+    async fakeQuote(parameters) {
         let parms = {}
 
         if (!_.isUndefined(parameters)) {
@@ -35,6 +33,8 @@ const TestData = {
 
         const Quote = {}
 
+        const faker = await import('faker')
+
         Quote.title = parms.title || faker.name.title()
         Quote.author = parms.author || { label: faker.name.title(), value: Random.id() }
         Quote.projects = parms.projects || []
@@ -42,6 +42,33 @@ const TestData = {
         Quote.body = parms.body || 'fake body'
 
         return Quote
+    },
+
+    async fakeQuotesList(parameters) {
+        let parms = {}
+
+        if (!_.isUndefined(parameters)) {
+            parms = parameters
+        }
+
+        const faker = await import('faker')
+
+        const quotes = []
+
+        const count = parms.count || 3
+
+        for (let i = 0; i < count; i += 1) {
+            const Quote = {}
+
+            Quote.title = parms.title || faker.name.title()
+            Quote.author = parms.author || { label: faker.name.title(), value: Random.id() }
+            Quote.projects = parms.projects || []
+            Quote.categories = parms.categories || []
+            Quote.body = parms.body || 'fake body'
+            quotes.push(Quote)
+        }
+
+        return quotes
     },
 
     fakeError(message) {
@@ -54,12 +81,14 @@ const TestData = {
         return err
     },
 
-    fakeCategory(parameters) {
+    async fakeCategory(parameters) {
         let parms = {}
 
         if (!_.isUndefined(parameters)) {
             parms = parameters
         }
+
+        const faker = await import('faker')
 
         const doc = {}
 
@@ -111,12 +140,14 @@ const TestData = {
         return doc
     },
 
-    fakeProject(parameters) {
+    async fakeProject(parameters) {
         let parms = {}
 
         if (!_.isUndefined(parameters)) {
             parms = parameters
         }
+
+        const faker = await import('faker')
 
         const doc = {}
 

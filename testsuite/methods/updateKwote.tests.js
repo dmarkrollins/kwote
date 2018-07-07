@@ -17,7 +17,7 @@ const should = chai.should();
 chai.use(sinonChai);
 
 if (Meteor.isServer) {
-    import '../../lib/method-updateKwote.js'
+    import '../../server/method-updateKwote.js'
 
     describe('Update Kwote Method', function () {
         let userId
@@ -48,10 +48,10 @@ if (Meteor.isServer) {
             expect(msg, 'should throw not logged in').to.be.equal('You must be authenticated to perform this action! [not-logged-in]');
         })
 
-        it('checks for not found', function () {
+        it('checks for not found', async function () {
             const context = { userId: userId };
             let msg = '';
-            const fakeQuote = TestData.fakeQuote()
+            const fakeQuote = await TestData.fakeQuote()
             sandbox.stub(Quotes, 'findOne').returns(null)
 
             try {
@@ -63,12 +63,12 @@ if (Meteor.isServer) {
             expect(msg, 'should throw not found error').to.be.equal('Kwote does not exist - cannot be updated! [not-found]');
         })
 
-        it('updates quote correctly - stubbed', function () {
+        it('updates quote correctly - stubbed', async function () {
             const context = { userId: userId };
             let msg = '';
             const qId = Random.id()
             let resultId = ''
-            const fakeQuote = TestData.fakeQuote()
+            const fakeQuote = await TestData.fakeQuote()
             fakeQuote._id = qId
             fakeQuote.projects = [{ label: 'fake-label', value: Random.id() }]
             fakeQuote.categories = [{ label: 'fake-label', value: Random.id() }, { label: 'fake-label2', value: Random.id() }]
@@ -90,12 +90,12 @@ if (Meteor.isServer) {
             expect(params.$set.body).to.equal(fakeQuote.body)
         })
 
-        it('handles update error correctly', function () {
+        it('handles update error correctly', async function () {
             const context = { userId: userId };
             let msg = '';
             const newId = Random.id()
             let resultId = ''
-            const fakeQuote = TestData.fakeQuote()
+            const fakeQuote = await TestData.fakeQuote()
             sandbox.stub(Quotes, 'findOne').returns(fakeQuote)
             sandbox.stub(Quotes, 'update').throws(TestData.fakeError())
             sandbox.stub(Logger, 'log')

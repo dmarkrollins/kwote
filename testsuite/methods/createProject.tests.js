@@ -63,12 +63,12 @@ if (Meteor.isServer) {
             expect(msg, 'should throw dup error').to.be.equal('You\'ve already created a Project with this name! [duplicate-found]');
         })
 
-        it('inserts new Project correctly - stubbed', function () {
+        it('inserts new Project correctly - stubbed', async function () {
             const context = { userId: userId };
             let msg = '';
             const newId = Random.id()
             let resultId = ''
-            const doc = TestData.fakeProject()
+            const doc = await TestData.fakeProject()
             sandbox.stub(Projects, 'findOne').returns(null)
             sandbox.stub(Projects, 'insert').returns(newId)
 
@@ -84,12 +84,12 @@ if (Meteor.isServer) {
             expect(params.title).to.equal(doc.title)
         })
 
-        it('handles insert error correctly', function () {
+        it('handles insert error correctly', async function () {
             const context = { userId: userId };
             let msg = '';
             const newId = Random.id()
             let resultId = ''
-            const doc = TestData.fakeProject()
+            const doc = await TestData.fakeProject()
             sandbox.stub(Projects, 'findOne').returns(null)
             sandbox.stub(Projects, 'insert').throws(TestData.fakeError())
             sandbox.stub(Logger, 'log')
