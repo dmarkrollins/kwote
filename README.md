@@ -12,15 +12,15 @@ It's mobile friendly so take Kwote with you wherever you go to capture new items
 
 ## Application Snapshots
 
-### Landing Page
+### Landing Page / Login
 
 <img src="/private/KwoteLanding.jpg" width="300" />
 
-### Kwote List
+### List Kwotes
 
 <img src="/private/KwoteList.jpg" width="300" />
 
-### Kwote List
+### Create New Kwote
 
 <img src="/private/KwoteNew.jpg" width="300" />
 
