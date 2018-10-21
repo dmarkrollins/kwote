@@ -26,6 +26,8 @@ It's mobile friendly so take Kwote with you wherever you go to capture new items
 
 ## Live Demo
 
+Be patient... hosted on Heroku's free tier that falls asleep.
+
 https://kwotes.herokuapp.com/
 
 ## Credits
