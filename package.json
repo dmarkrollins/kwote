@@ -14,7 +14,7 @@
     "dependencies": {
         "@babel/core": "^7.13.10",
         "@babel/runtime": "^7.13.10",
-        "ajv": "^6.12.6",
+        "ajv": "^5.0.0",
         "bcrypt": "^5.0.1",
         "jquery": "2.2.4",
         "meteor-node-stubs": "^0.4.1",
@@ -49,8 +49,5 @@
         "faker": "^4.1.0",
         "sinon": "^4.5.0",
         "sinon-chai": "^2.14.0"
-    },
-    "engines": {
-        "node": "12.21.0"
     }
 }
