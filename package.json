@@ -51,6 +51,6 @@
         "sinon-chai": "^2.14.0"
     },
     "engines": {
-        "node": "8.x"
+        "node": "12.21.0"
     }
 }
