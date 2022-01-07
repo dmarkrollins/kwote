@@ -42,9 +42,9 @@ Template.projectList.helpers({
 })
 
 Template.projectList.events({
-    'keypress #editValue': function (event, instance) {
-        $('#editValue').val(event.target.value.toProperCase())
-    },
+    // 'keypress #editValue': function (event, instance) {
+    //     $('#editValue').val(event.target.value.toProperCase())
+    // },
     'click #btnDelete': function (event, instance) {
         const title = 'Delete Project?'
         const msg = `Are you sure you want to permanently delete project: <b>${this.title}</b>?`

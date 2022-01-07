@@ -42,9 +42,9 @@ Template.categoryList.helpers({
 })
 
 Template.categoryList.events({
-    'keypress #editValue': function (event, instance) {
-        $('#editValue').val(event.target.value.toProperCase())
-    },
+    // 'keypress #editValue': function (event, instance) {
+    //     $('#editValue').val(event.target.value.toProperCase())
+    // },
     'click #btnDelete': function (event, instance) {
         const title = 'Delete Category?'
         const msg = `Are you sure you want to permanently delete category: <b>${this.title}</b>?`

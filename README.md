@@ -1,4 +1,4 @@
-# Kwote - literary quote manager
+# Kwote - literary quote manager V1.1
 
 If you're an author and you collect quotations, sayings, conversation snippets etc. to support your writing habit, then Kwote might come in handy.
 
@@ -25,8 +25,6 @@ It's mobile friendly so take Kwote with you wherever you go to capture new items
 <img src="/private/KwoteNew.jpg" width="300" />
 
 ## Live Demo
-
-Be patient... hosted on Heroku's free tier that falls asleep.
 
 https://kwotes.herokuapp.com/
 
